@@ -7,7 +7,7 @@
  */
 
 function index(req, res) {
-    res.render('admin/index', {title: 'HOME', main: '/admin/psd/init'})
+    res.render('admin/index', {title: 'HOME', main: '/admin/psd/init', css: ['/admin/psd/psd.css']})
 }
 
 
