@@ -2,6 +2,8 @@ extends layout
 block content
     #container
         h5 拖曳图片到这里
+        .progress.progress-striped.active
+            #p.bar(style="width:40%;") 正在上传 Hello.psd
         #pic
             .pic 1
             .pic 2
@@ -24,4 +26,5 @@ block content
             .pic 18
             .pic 19
             .pic 20
+    form(action='/admin/save-psd',id="psd-form",enctype="multipart/form-data")
     #drag-tips     拖动到新位置
