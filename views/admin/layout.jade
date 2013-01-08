@@ -1,0 +1,60 @@
+!!!5
+html
+    head
+        meta(charset='utf-8')
+        title=title
+        link(rel='stylesheet',href='/bootstrap/css/bootstrap.min.css')
+        link(rel='stylesheet',href='/bootstrap/css/bootstrap-responsive.min.css')
+    body
+        .navbar
+            .navbar-inner
+                .container
+                    a.btn.btn-navbar(data-toggle='collapse', data-target='.navbar-responsive-collapse')
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    a.brand(href='#') 杰杰新首页
+                    .nav-collapse.collapse.navbar-responsive-collapse
+                        ul.nav
+                            li.dropdown
+                                a.dropdown-toggle(href='#', data-toggle='dropdown')
+                                    | Dropdown
+                                    b.caret
+                                ul.dropdown-menu
+                                    li
+                                        a(href='#') Action
+                                    li
+                                        a(href='#') Another action
+                                    li
+                                        a(href='#') Something else here
+                                    li.divider
+                                    li.nav-header Nav header
+                                    li
+                                        a(href='#') Separated link
+                                    li
+                                        a(href='#') One more separated link
+                        form.navbar-search.pull-left(action='')
+                            input.search-query.span2(type='text', placeholder='Search')
+                        ul.nav.pull-right
+                            li
+                                a(href='#') Link
+                            li.divider-vertical
+                            li.dropdown
+                                a.dropdown-toggle(href='#', data-toggle='dropdown')
+                                    | Dropdown
+                                    b.caret
+                                ul.dropdown-menu
+                                    li
+                                        a(href='#') Action
+                                    li
+                                        a(href='#') Another action
+                                    li
+                                        a(href='#') Something else here
+                                    li.divider
+                                    li
+                                        a(href='#') Separated link
+        block content
+        - if( typeof main !== 'undefined' )
+            script(src='/global/jquery-1.8.3.min.js')
+            script(src='/bootstrap/js/bootstrap.min.js')
+            script(src="/seajs/sea-debug.js",data-main='#{main}')

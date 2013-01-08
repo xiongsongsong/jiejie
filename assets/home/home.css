@@ -1,0 +1,129 @@
+#banner-container {
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+}
+
+#banner-container .banner {
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+    background-position: center 0;
+    background-repeat: no-repeat;
+}
+
+.item h3 span s,
+#about .advantage,
+.item h2.title,
+#about .overview,
+#about .team,
+#about .advantage {
+    background-image: url(/global/images/sprites.png);
+}
+
+.item {
+    width: 990px;
+    margin: 0 auto;
+}
+
+.item h2.title {
+    height: 45px;
+    margin: 1em auto;
+    font-size: 30px;
+    font-family: "Microsoft yahei", sans-serif;
+    font-weight: normal;
+    line-height: normal;
+    background-position: 0 -65px;
+}
+
+.item h2.title b {
+    font-size: 18px;
+    font-weight: normal;
+    border-bottom: solid 3px #ec6b1e;
+    font-family: Consolas, verdana, simsun, sans-serif;
+    color: #9fa0a0;
+    margin: 0 5px;
+}
+
+.item h3 span {
+    padding-left: 34px;
+    display: inline-block;
+    position: relative;
+}
+
+.item h3 span s {
+    position: absolute;
+    left: 0;
+    width: 29px;
+    height: 29px;
+    overflow: hidden;
+}
+
+/*关于我们 About*/
+
+#about .container {
+    position: relative;
+    height: 631px;
+}
+
+#about .overview,
+#about .team,
+#about .advantage {
+    position: absolute;
+    top: 0;
+    width: 370px;
+    height: 428px;
+    background-position: 0 -602px;
+}
+
+#about .content h3 {
+    font-size: 24px;
+}
+
+#about .content h3 span {
+    font-family: "Microsoft yahei", sans-serif;
+}
+
+#about .content h3 b {
+    color: #9fa0a0;
+    font-size: 14px;
+    margin-left: 3px;
+    font-weight: normal;
+}
+
+#about .content {
+    margin: 104px 67px 0 36px;
+}
+
+#about .content .text {
+    color: #656565;
+    margin: 1em auto;
+}
+
+#about .overview {
+    left: 0
+}
+
+#about .overview h3 span s {
+    background-position: 0 0;
+}
+
+#about .team h3 span s {
+    background-position: -36px 0;
+}
+
+#about .team h3 span s {
+    background-position: -73px 0;
+}
+
+#about .team {
+    left: 310px
+}
+
+#about .advantage {
+    left: 620px
+}
+
+/*我们能做*/
+#what-we-do .service {
+}

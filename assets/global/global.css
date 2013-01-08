@@ -1,0 +1,33 @@
+#header {
+    width: 990px;
+    margin: 0 auto;
+    height: 64px;
+    position: relative;
+}
+
+#header img.logo {
+    position: absolute;
+    left: 0;
+    top: 26px;
+}
+
+#header ul {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+#header ul li {
+    float: left;
+    margin: 0 19px;
+    border-bottom: solid 4px #f4f4f6;
+    padding: 0 21px 8px 21px;
+}
+
+#header ul li.checked {
+    border-color: #eb610f;
+}
+
+body {
+    background: url(/global/images/body-bg.png);
+}
