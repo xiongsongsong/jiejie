@@ -8,6 +8,8 @@ var express = require('express')
     , http = require('http')
     , path = require('path');
 
+require('db');
+
 var app = express();
 
 
@@ -34,8 +36,10 @@ app.configure('development', function () {
 
 routes.init(app);
 
+app.get(/\/file\/([\w]+)/, require('./routes/fs').file);
+
+app.get('/fsfilter', require('./routes/filter').find);
+
 http.createServer(app).listen(app.get('port'), function () {
     console.log("Express server listening on port " + app.get('port'));
 });
-
-
