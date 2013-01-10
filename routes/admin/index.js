@@ -22,77 +22,48 @@ var ObjectID = DB.mongodb.ObjectID;
 function savePsd(req, res) {
 
     if (!req.files.file) {
-        res.end('error');
+        res.end('你必须上传至少一个文件');
         return;
     }
+    var files = Array.isArray(req.files.file) ? req.files.file : [req.files.file];
 
-    var files;
+    //过滤掉后缀名不正确的文件
+    files = files.filter(function (item) {
+        return allowFile[ path.extname(item.name).substring(1) ];
+    });
 
-    if (Array.isArray(req.files.file)) {
-        files = req.files.file;
-    } else if (req.files.file.path) {
-        files = [req.files.file]
-    }
-
-    _savePsd(files, function (pass, error) {
-
-        var collection = new DB.mongodb.Collection(DB.client, 'log');
-
-        var docs = [];
-
-        pass.forEach(function (item) {
-            docs.push({
-                _id: item._id,
-                fileName: item.name,
-                wh: item.wh,
-                path: path.basename(item.path),
-                length: item.length,
-                category: [],
-                color: [],
-                data: [],
-                series: [],
-                timestamp: Date.now(),
-                sort: Date.now(),
-                author: 'songsong',
-                status: 1 // 0；被删除文件，1：待编辑文件  2：私人文件，3：正常的文件，4：缩略图文件
-            })
-        });
-
-        collection.insert(docs, {safe: true},
-            function () {
-                res.end(JSON.stringify({images: pass.map(function (file) {
-                    return path.basename(file.path)
-                }), err: error}, undefined, '    '));
-            });
-    })
+    //存为数组以方便递归处理
+    _savePsd(files, req, res);
 }
 
-//都是宽度按比例缩放
+//按比例缩放，只针对宽度
 var resizeParam = [24, 30, 40, 60, 70, 80, 100, 110, 120, 160, 170, 200, 210, 250, 310, 620, 670];
 
+var allowFile = {
+    'jpg': 'image/jpg',
+    'jpeg': 'image/jpg',
+    'gif': 'image/gif',
+    'png': 'image/png',
+    'psd': 'image/psd'
+};
 
-function _savePsd(arr, cb) {
+//递归保存每个文件日志、文件实体和对应缩略图
+function _savePsd(files, req, res) {
 
     var errorMsg = [];
     var pass = [];
 
     function save() {
-        if (arr.length < 1) {
-            cb(pass, errorMsg);
+
+        if (files.length < 1) {
+            res.end(JSON.stringify({pass: pass, err: errorMsg}, undefined, '    '));
             return;
         }
-        var cur = arr.shift();
 
-        var allowFile = {
-            'jpg': 'image/jpg',
-            'jpeg': 'image/jpg',
-            'gif': 'image/gif',
-            'png': 'image/png'
-        };
+        var cur = files.shift();
 
-        var extName = path.extname(cur.name).substring(1);
+        var extName = path.extname(cur.name).substring(1).toLocaleLowerCase();
 
-        console.log('检查扩展名' + extName);
         if (!allowFile[extName]) {
             return;
         }
@@ -100,30 +71,96 @@ function _savePsd(arr, cb) {
         //检查是否为有效图片
         im.identify(['-format', '%wx%h', cur.path], function (err, output) {
             if (!err) {
+
                 cur.wh = output;
-
                 // Our file ID
-                var fileId = new ObjectID();
+                var fileId = new ObjectID().toString();
 
-                // Open a new file
+                var collection = new DB.mongodb.Collection(DB.client, 'files');
 
-                var gs = new GridStore(DB.dbServer, fileId, "w", {
-                    "chunk_size": 1024 * 64
-                });
+                //先保存上传日志，在将文件保存到GridFS
+                collection.insert({
+                        _id: fileId,
+                        fileName: cur.name,
+                        wh: extName === 'psd' ? 'psd' : output,
+                        path: path.basename(cur.path),
+                        length: cur.length,
+                        category: [],
+                        color: [],
+                        data: [],
+                        series: [],
+                        tag: [],
+                        timestamp: Date.now(),
+                        sort: Date.now(),
+                        author: 'songsong',
+                        status: 1 // 0；被删除文件，1：待编辑文件  2：私人文件，3：正常的文件，4：缩略图文件
+                    }, {safe: true},
+                    function (err /*,result*/) {
+                        if (!err) {
 
-                cur._id = fileId;
+                            pass.push(fileId);
 
-                pass.push(cur);
+                            var gs;
 
-                gs.writeFile(cur.path, function (err, data) {
-                    //console.log(err, data);
-                    //生成缩略图
-                    resize(cur, fileId, function () {
-                        save();
+                            if (extName === 'psd') {
+                                console.log('即将处理PSD');
+                                //首先保存PSD，注意后缀
+                                gs = new GridStore(DB.dbServer, fileId + '_psd', "w", {
+                                    chunk_size: 10240
+                                });
+                                gs.writeFile(cur.path, function (err) {
+                                    if (!err) {
+                                        console.log('保存PSD成功');
+                                        console.log('正在转换PSD文件为jpg');
+                                        var jpgPath = path.join(path.dirname(cur.path), fileId + '.jpg');
+
+                                        im.convert([cur.path + '[0]', jpgPath], function (err) {
+                                            if (!err) {
+                                                console.log('成功转换psd-->jpg');
+                                                //将PSD转换为JPG
+                                                gs = new GridStore(DB.dbServer, fileId, "w", {
+                                                    chunk_size: 10240
+                                                });
+                                                console.log('开始保存psd生成的jpg');
+
+                                                gs.writeFile(jpgPath, function (err) {
+                                                    if (!err) {
+                                                        console.log('保存psd生成的jpg成功！');
+                                                        //用新生成的jpg来生成缩略图
+                                                        cur.path = jpgPath;
+                                                        resize(cur, fileId, function () {
+                                                            save();
+                                                        });
+                                                    } else {
+                                                        console.log('无法保存jpg' + fileId + Date.now());
+                                                    }
+                                                });
+                                            } else {
+                                                console.log('转换PSD到jpg失败', err);
+                                            }
+                                        });
+                                    } else {
+                                        console.log('PSD保存失败');
+                                    }
+                                });
+                            } else {
+                                gs = new GridStore(DB.dbServer, fileId, "w", {
+                                    chunk_size: 10240
+                                });
+
+                                gs.writeFile(cur.path, function (err) {
+                                    //先生成上传记录，再保存到gridFS
+                                    resize(cur, fileId, function () {
+                                        save();
+                                    });
+                                });
+                            }
+
+                        } else {
+                            errorMSG.push('无法保存该条记录' + Date.now() + ',');
+                            console.log(err);
+                        }
                     });
-
-                });
-
 
             } else {
                 errorMsg.push(cur.name + ' wrong picture file');
@@ -132,6 +169,7 @@ function _savePsd(arr, cb) {
         });
     }
 
+    //对上传的图片生成不同规格的缩略图
     function resize(cur, fileId, cb) {
         var w = parseInt(cur.wh.substring(0, cur.wh.indexOf('x')), 10);
         var _resizeParam = resizeParam.filter(function (item) {
@@ -144,16 +182,30 @@ function _savePsd(arr, cb) {
                 return;
             }
             var curSize = _resizeParam.shift();
+
+            //生成缩略图并存入库中
+            var dstSrc = cur.path + '_' + curSize;
             im.resize({
                 srcPath: cur.path,
-                dstPath: cur.path + '_' + curSize,
+                dstPath: dstSrc,
                 width: curSize
-            }, function (err, stdout, stderr) {
-                if (err) throw err;
-                console.log('resized kittens.jpg to fit within' + curSize);
-                _resize();
+            }, function (err) {
+                if (!err) {
+                    var gs = new GridStore(DB.dbServer, fileId + '_' + curSize, "w", {
+                        "chunk_size": 10240
+                    });
+                    gs.writeFile(dstSrc, function (err) {
+                        if (err) console.log(err);
+                        _resize();
+                    });
+                } else {
+                    console.log(err);
+                    _resize();
+                }
+
             });
         }
+
         _resize();
     }
 

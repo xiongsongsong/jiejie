@@ -8,7 +8,7 @@
 
 define(function (exports, require, module) {
     var $pic = $('#pic');
-    var allowFile = ['jpg', 'jpeg', 'png', 'gif'];
+    var allowFile = ['jpg', 'jpeg', 'png', 'gif', 'psd'];
 
     //拖进
     $pic.bind('dragenter', function (e) {

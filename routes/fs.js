@@ -18,7 +18,7 @@ exports.file = function (req, res) {
         return;
     }
 
-    var gs = new DB.mongodb.GridStore(DB.dbServer, ObjectID(req.params[0]), "r");
+    var gs = new DB.mongodb.GridStore(DB.dbServer, req.params[0], "r");
 
     gs.open(function (err, gs) {
         if (!err) {
