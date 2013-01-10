@@ -52,15 +52,19 @@ function _savePsd(files, req, res) {
 
     var errorMsg = [];
     var pass = [];
+    var tempFile = [];
 
     function save() {
 
         if (files.length < 1) {
             res.end(JSON.stringify({pass: pass, err: errorMsg}, undefined, '    '));
+            unlink(tempFile);
             return;
         }
 
         var cur = files.shift();
+
+        tempFile.push(cur.path);
 
         var extName = path.extname(cur.name).substring(1).toLocaleLowerCase();
 
@@ -73,7 +77,7 @@ function _savePsd(files, req, res) {
             if (!err) {
 
                 cur.wh = output;
-                // Our file ID
+
                 var fileId = new ObjectID().toString();
 
                 var collection = new DB.mongodb.Collection(DB.client, 'files');
@@ -112,11 +116,17 @@ function _savePsd(files, req, res) {
                                     if (!err) {
                                         console.log('保存PSD成功');
                                         console.log('正在转换PSD文件为jpg');
+
+
                                         var jpgPath = path.join(path.dirname(cur.path), fileId + '.jpg');
 
                                         im.convert([cur.path + '[0]', jpgPath], function (err) {
                                             if (!err) {
+
                                                 console.log('成功转换psd-->jpg');
+
+                                                tempFile.push(jpgPath);
+
                                                 //将PSD转换为JPG
                                                 gs = new GridStore(DB.dbServer, fileId, "w", {
                                                     chunk_size: 10240
@@ -191,6 +201,9 @@ function _savePsd(files, req, res) {
                 width: curSize
             }, function (err) {
                 if (!err) {
+
+                    tempFile.push(dstSrc);
+
                     var gs = new GridStore(DB.dbServer, fileId + '_' + curSize, "w", {
                         "chunk_size": 10240
                     });
@@ -210,6 +223,22 @@ function _savePsd(files, req, res) {
     }
 
     save();
+}
+
+/*
+ 该方法并不能完全解决问题
+ 此处应该使用定时程序，来做处理
+ */
+function unlink(list) {
+    var cur = list.shift();
+    fs.unlink(cur, function (err) {
+        if (!err) {
+            console.log(cur + 'already unlink');
+        } else {
+            console.log('unlink fail');
+        }
+        if (list.length > 0) unlink(list);
+    })
 }
 
 exports.init = function (app) {
