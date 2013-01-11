@@ -22,7 +22,6 @@ exports.file = function (req, res) {
 
     gs.open(function (err, gs) {
         if (!err) {
-            console.log(gs);
             gs.read(gs.length, function (err, data) {
                 res.end(data);
             });

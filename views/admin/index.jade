@@ -1,30 +1,50 @@
 extends layout
 block content
     #container
-        h5 拖曳图片到这里
+        #filter
+            .filter-container
+                h4 Category
+                .color
+                    .btn-group
+                        .btn(t="category",value="EDM") EDM
+                        .btn(t="category",value="Web页面") Web
+                        .btn(t="category",value="手机端") 手机端
+                        .btn(t="category",value="Banner") Banner
+                        .btn(t="category",value="Logo") Logo
+                        .btn(t="category",value="Icon") Icon
+                        .btn(t="category",value="其他") 其他
+                h4 Color
+                .color
+                    span(rel="tooltip",t="color",title="不限",value="",style="color:black;") All
+                    span(rel="tooltip",t="color",title="红色",value="红色",style="background-color:#DE2020;")
+                    span(rel="tooltip",t="color",title="橙色",value="橙色",style="background-color:#FE6C00;")
+                    span(rel="tooltip",t="color",title="黄色",value="黄色",style="background-color:#FEBF00;")
+                    span(rel="tooltip",t="color",title="绿色",value="绿色",style="background-color:#59A725;")
+                    span(rel="tooltip",t="color",title="紫色",value="紫色",style="background-color:#892BCF;")
+                    span(rel="tooltip",t="color",title="粉色",value="粉色",style="background-color:#D744BA;")
+                    span(rel="tooltip",t="color",title="青色",value="青色",style="background-color:#06B7C8;")
+                    span(rel="tooltip",t="color",title="蓝色",value="蓝色",style="background-color:#0065FE;")
+                    span(rel="tooltip",t="color",title="棕色",value="棕色",style="background-color:#733413;")
+                    span(rel="tooltip",t="color",title="白色",value="白色",style="background-color:white;")
+                    span(rel="tooltip",t="color",title="黑色",value="黑色",style="background-color:black;")
+                h4 Date
+                .date
+                    .btn-group
+                        a.btn(href="#",t="date",value="2011") 2011
+                        a.btn(href="#",t="date",value="2012") 2012
+                h4 Series
+                .series
+                    .btn-group
+                        a.btn(href="#",t="series",value="") 不限
+                        a.btn(href="#",t="series",value="机票专题") 机票专题
+                        a.btn(href="#",t="series",value="旅行专题") 旅行专题
+                b.switch     修改
+        h5#status  将图片拖曳到这里来上传
         .progress.progress-striped.active
             #p.bar(style="width:0%;") 0%
         #pic
-            .pic 1
-            .pic 2
-            .pic 3
-            .pic 4
-            .pic 5
-            .temp-pic
-            .pic 6
-            .pic 7
-            .pic 8
-            .pic 9
-            .pic 10
-            .pic 11
-            .pic 12
-            .pic 13
-            .pic 14
-            .pic 15
-            .pic 16
-            .pic 17
-            .pic 18
-            .pic 19
-            .pic 20
+            #img-container
+        #upload-mask
+
     form(action='/admin/save-psd',id="psd-form",enctype="multipart/form-data")
-    #drag-tips     拖动到新位置
+    #drag-tips

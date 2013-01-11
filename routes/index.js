@@ -10,6 +10,8 @@ exports.init = function (app) {
 
     app.get('/', index);
 
+    app.get('/filter', require('./filter').find);
+
     //后台管理的路由
     require('./admin').init(app);
 

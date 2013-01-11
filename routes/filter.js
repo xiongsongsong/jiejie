@@ -10,8 +10,14 @@ var DB = require('db');
 var path = require('path');
 
 
-
 exports.find = function (req, res) {
 
+    var collection = new DB.mongodb.Collection(DB.client, 'files');
 
+    collection.find({}, {}).sort([
+            ['_id', 1]
+        ]).toArray(function (err, docs) {
+            res.header('content-type', 'application/json;charset=utf-8');
+            res.end(JSON.stringify({docs: docs}, undefined, '\t'));
+        })
 };

@@ -16,8 +16,13 @@
 
 define(function (require, exports, module) {
 
-    require('./sort');
+
+    require('./init-data');
+
+    require('./update');
+
+    //require('./sort');
+
     require('./drag-upload');
 
-})
-;
+});

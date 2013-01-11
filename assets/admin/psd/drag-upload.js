@@ -62,7 +62,7 @@ define(function (exports, require, module) {
 
     function uploadProgress(evt) {
         var percent = Math.round(evt.loaded * 100 / evt.total);
-        $('#p').html(percent + '%').css('width', '100%');
+        $('#p').html(percent + '%').css('width', percent + '%');
     }
 
 });
