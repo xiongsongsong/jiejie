@@ -141,9 +141,9 @@
     position: fixed;
     left: 500px;
     top: 0;
-    background: rgba(255, 255, 255, .98);
+    background: rgba(255, 255, 255, .8);
     border-radius: 2px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+    box-shadow: 0 0 15px rgba(0, 0, 0, .8);
     z-index: 100;
 }
 
@@ -169,7 +169,6 @@ b.switch {
     font-weight: normal;
     background: rgba(0, 0, 0, .5);
     color: #fff;
-    width: 80%;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
 }

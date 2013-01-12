@@ -44,7 +44,7 @@ define(function (require, exports, module) {
         return arr;
     }
 
-    exports.update();
+    //exports.update();
 
     function render(data) {
         var li = '';

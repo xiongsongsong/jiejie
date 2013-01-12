@@ -12,13 +12,13 @@ define(function (require, exports, module) {
 
     var $document = $(document);
 
-    $control.find('b.switch').click(function () {
+    $control.find('b.switch').live('click', function () {
         $this = $(this);
         $curPanel = $this.parents('div.control-panel');
 
         hide($curPanel);
-
     });
+
     function hide($curPanel) {
         $curPanel.stop();
         $this = $curPanel.find('b.switch');

@@ -88,7 +88,6 @@ function _savePsd(files, req, res) {
                         fileName: cur.name,
                         width: cur.width,
                         height: cur.height,
-                        path: path.basename(cur.path),
                         length: cur.length,
                         category: '',
                         color: '',

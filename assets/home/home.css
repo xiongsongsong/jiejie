@@ -1,3 +1,15 @@
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden
+}
+
+.clearfix {
+    zoom: 1;
+}
+
 #banner-container {
     height: 400px;
     position: relative;
@@ -16,8 +28,11 @@
 #about .advantage,
 .item h2.title,
 #about .overview,
+#p b,
 #about .team,
-#about .advantage {
+#about .advantage,
+#copy-right .phone s,
+#copy-right .email s {
     background-image: url(/global/images/sprites.png);
 }
 
@@ -63,7 +78,7 @@
 
 #about .container {
     position: relative;
-    height: 631px;
+    height: 402px;
 }
 
 #about .overview,
@@ -127,4 +142,218 @@
 /*我们能做*/
 #what-we-do .service {
 
+}
+
+/*设计作品
+*/
+#portfolio {
+    position: relative;
+}
+
+#portfolio-container {
+    position: relative;
+    height: 540px;
+    overflow: hidden;
+}
+
+#portfolio .nav-bar {
+    position: absolute;
+    left: -80px;
+    top: 72px;
+    border: solid 5px #eee;
+    padding: 5px;
+    font-size: 12px;
+}
+
+#portfolio .nav-bar b {
+    display: block;
+    font-weight: normal;
+    background: #fff;
+    padding: 12px;
+    border: dashed 1px #aaa;
+}
+
+#portfolio .nav-bar b.checked {
+    background: #555;
+    color: #fff;
+}
+
+#filter-waterfall {
+    height: 49px;
+    width: 990px;
+}
+
+#filter-waterfall b {
+    float: left;
+    height: 49px;
+    color: #e8e8e8;
+    background: #636364;
+    font-family: "Microsoft yahei", sans-serif;
+    line-height: 49px;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+#filter-waterfall b.checked {
+    background: #eb610f;
+    color: #fff;
+}
+
+.hidden {
+    display: none;
+}
+
+#portfolio-container .pic {
+    width: 198px;
+    height: 108px;
+    float: left;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: center 0;
+    background-color: #aaa;
+}
+
+#p {
+    float: right;
+    margin: 12px 0 0 0;
+}
+
+#p b {
+    width: 18px;
+    float: left;
+    height: 18px;
+    overflow: hidden;
+    text-indent: -999em;
+    display: inline-block;
+    position: relative;
+    margin: 0 0 0 1em;
+    cursor: pointer;
+}
+
+#p b.prev {
+    background-position: -194px 0;
+}
+
+#p b.next {
+    background-position: -228px 0;
+}
+
+.scrollable {
+    position: relative;
+    width: 990px;
+
+}
+
+.scrollable .prev, .scrollable .next {
+    position: absolute;
+    top: 50px;
+    color: #666;
+    cursor: pointer;
+}
+
+.scrollable .prev {
+    left: -70px;
+}
+
+.scrollable .next {
+    right: -70px;
+}
+
+.scrollable .disable {
+    color: #ddd;
+    cursor: default;
+}
+
+.scrollable .ks-switchable-nav {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: absolute;
+    right: 30px;
+    top: -10px;
+    display: none;
+}
+
+.scrollable .ks-switchable-nav li {
+    margin: 0;
+    list-style: none;
+    float: left;
+    padding: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.scrollable .ks-switchable-nav li.ks-active {
+    color: #C8282B;
+}
+
+.scroller {
+    position: relative;
+    width: 987px;
+    height: 200px;
+    overflow: hidden;
+}
+
+#ks-switchable-content div {
+    float: left;
+    width: 141px;
+    height: 200px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+    filter: gray;
+}
+
+#copy-right {
+    background: #dcdcdc;
+    height: 103px;
+    margin-top: 80px;
+}
+
+#copy-right .item {
+    position: relative;
+}
+
+#copy-right .phone {
+    margin-right: 2em;
+}
+
+#copy-right .email {
+    color: #4D4D4D;
+    text-decoration: none;
+}
+
+#copy-right .phone s,
+#copy-right .email s {
+    display: inline-block;
+    width: 19px;
+    height: 21px;
+    white-space: nowrap;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+#copy-right .phone s {
+    background-position: -589px 0;
+}
+
+#copy-right .email s {
+    background-position: -613px 0;
+}
+
+#copy-right .copyright {
+    position: absolute;
+    left: 0;
+    top: 30px;
+}
+
+#copy-right .contact {
+    position: absolute;
+    right: 0;
+    top: 30px;
 }

@@ -3,9 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>jiejie 杰杰设计 </title>
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/global/reset.css">
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.min.css">
     <link rel="stylesheet" href="/global/global.css">
     <link rel="stylesheet" href="/home/home.css">
 </head>
@@ -86,7 +84,229 @@
 
 <div id="portfolio" class="item">
     <h2 class="title"><span><s></s>设计作品</span><b>Portoflio</b></h2>
+
+    <div class="nav-bar" id="nav-field">
+        <b data-field="category">按类型</b>
+        <b data-field="color">按色系</b>
+        <b data-field="series">按系列</b>
+    </div>
+    <div id="filter-waterfall" class="clearfix">
+
+    </div>
+    <div id="portfolio-container">
+
+    </div>
+    <div id="p" class="clearfix"><b class="prev">上一页</b> <b class="next">下一页</b></div>
 </div>
+
+<div id="show" class="item">
+    <h2 class="title"><span><s></s>风采秀</span><b>Mien show</b></h2>
+
+    <div id="demo6" class="s-demo scrollable">
+        <span id="scroller-prev" class="prev disable">&lsaquo; 上一页</span>
+        <span id="scroller-next" class="next">下一页 &rsaquo;</span>
+
+        <div class="scroller">
+            <div class="ks-switchable-content" id="ks-switchable-content">
+
+            </div>
+            <ul class="ks-switchable-nav">
+                <li class="ks-active">&bull;</li>
+                <li>&bull;</li>
+                <li>&bull;</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<script src="http://a.tbcdn.cn/s/kissy/1.3.0/seed-min.js"></script>
+<script type="text/javascript">
+    KISSY.use("event,dom,switchable,datalazyload,ajax", function (S, Event, DOM, Switchable) {
+        var Carousel = Switchable.Carousel;
+
+        KISSY.io({
+            url: '/filter',
+            type: 'get',
+            dataType: 'json',
+            data: {
+                category: '风采秀'
+            },
+            success: function (data) {
+                var container = DOM.get('#ks-switchable-content');
+                var li = '';
+                S.each(data.docs, function (item) {
+                    li += '<div class="pic" data-id="' + item._id + '" style="background-image:url(/file/' + item._id + '_310)"></div>'
+                });
+                DOM.html(container, li);
+                //通过DOM元素新建旋转木马
+                var carousel = new Carousel('#demo6', {
+                    effect: 'scrollx',
+                    easing: 'easeOutStrong',
+                    steps: 7,
+                    viewSize: [987],
+                    circular: false,
+                    prevBtnCls: 'prev',
+                    nextBtnCls: 'next',
+                    //autoplay:true,//是否自动切换
+                    disableBtnCls: 'disable',
+                    lazyDataType: 'img-src'
+                });
+
+            }
+        });
+    });
+</script>
+
+<script type="tpl" id="tpl">
+    {{#each docs as item index}}
+    <span class="pic" data-id="{{item._id}}" style="background-image:url(/file/{{item._id}}_250)"></span>
+    {{/each}}
+</script>
+
+<div id="copy-right">
+    <div class="item">
+    <p class="copyright">Copyright &copy; 2012 jiejie. All rights reserved.</p>
+
+    <p class="contact">
+        <span class="phone"><s></s>0571-88838528-886</span>
+        <a class="email" href="mailto:maomao@suncn.cn"><s></s>maomao@suncn.cn</a>
+    </p>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    KISSY.use("gallery/template/1.0/,dom,event,ajax,anim", function (S, Template, DOM, Event, io) {
+
+        var waterFall = DOM.get('#filter-waterfall');
+
+        var tpl = DOM.get('#tpl').innerHTML;
+
+        Event.delegate('#nav-field', 'mousedown', 'b', function (ev) {
+            var target = ev.currentTarget;
+            var field = DOM.attr(target, 'data-field');
+            DOM.removeClass(DOM.siblings(target), 'checked');
+            DOM.addClass(target, 'checked');
+            KISSY.io({
+                url: '/get-category',
+                type: 'get',
+                cache: false,
+                data: {
+                    field: field
+                },
+                dataType: 'json', success: function (data) {
+                    data = S.filter(data, function (item) {
+                        return item.length > 1 && item !== '风采秀';
+                    });
+                    var li = '';
+                    S.each(data, function (item) {
+                        li += '<b data-value="' + item + '">' + item + '</b>';
+                    });
+                    waterFall.innerHTML = li;
+                    DOM.addClass(DOM.get('b', waterFall), 'checked');
+                    Event.fire(DOM.get('b', waterFall), 'mousedown');
+                    var b = DOM.query('b', waterFall);
+                    var width = parseInt(990 / data.length, 10);
+                    DOM.css(b, {
+                        width: width
+                    });
+
+                    DOM.css(b[b.length - 1], {
+                        width: 990 - width * (data.length - 1)
+                    });
+
+                }
+            });
+        });
+
+        Event.delegate('#filter-waterfall', 'mousedown', 'b', function (ev) {
+            var target = ev.currentTarget;
+            var value = DOM.attr(target, 'data-value');
+            DOM.removeClass(DOM.siblings(target), 'checked');
+            DOM.addClass(target, 'checked');
+            findFile();
+        });
+
+        Event.fire(DOM.get('b', '#nav-field'), 'mousedown');
+
+        var currentData = [];
+
+        var num = 25;//每页显示多少条
+        var idx = 1;
+
+        function P() {
+
+            this.data = [];
+            var self = this;
+
+            function go() {
+                var curDate;
+                if (self.data.length > num) {
+                    curDate = self.data.slice((idx - 1) * num, (idx - 1) * num + num);
+                } else {
+                    curDate = self.data;
+                }
+                DOM.get('#portfolio-container').innerHTML = Template(tpl).render({docs: curDate});
+            }
+
+            this.render = function (data) {
+                self.totalPage = Math.ceil(data.docs.length / num);
+                self.data = data.docs;
+                go();
+            };
+
+            this.next = function () {
+                idx++;
+                if (idx > self.totalPage) {
+                    idx = self.totalPage;
+                }
+                go();
+            };
+
+            this.prev = function () {
+                idx--;
+                if (idx < 1) {
+                    idx = 1;
+                }
+                go();
+            }
+
+
+        }
+
+        var p = new P();
+
+        Event.delegate('#p', 'mousedown', 'b', function (ev) {
+            var target = ev.target;
+            p[target.className]();
+        });
+
+
+        function findFile() {
+            var category = DOM.get('b.checked', '#nav-field');
+            var data = {};
+            data[DOM.attr(category, 'data-field')] = DOM.attr(DOM.get('b.checked', '#filter-waterfall'), 'data-value');
+            KISSY.io({
+                url: "/filter",
+                type: "get",
+                dataType: "json",
+                data: data,
+                //http://localhost/filter?category=WEB&date=2011
+                success: function (data) {
+                    data.docs = S.filter(data.docs, function (item) {
+                        return item.width > 250 && item.height > 250;
+                    });
+                    currentData = data.docs;
+                    idx = 1;
+                    p.render(data);
+
+                }
+            })
+        }
+    });
+
+</script>
 
 
 </body>

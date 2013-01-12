@@ -12,6 +12,9 @@ exports.init = function (app) {
 
     app.get('/filter', require('./filter').find);
 
+
+    app.get('/get-category', require('./filter').getCategory);
+
     //后台管理的路由
     require('./admin').init(app);
 
