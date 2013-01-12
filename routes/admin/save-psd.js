@@ -20,11 +20,14 @@ exports.savePsd = function (req, res) {
         res.end('你必须上传至少一个文件');
         return;
     }
+
     var files = Array.isArray(req.files.file) ? req.files.file : [req.files.file];
+
+    res.end('您上传了' + req.files.file.length + '个文件，服务器需要花费一些时间来处理，一般为几分钟以内。');
 
     //过滤掉后缀名不正确的文件
     files = files.filter(function (item) {
-        return allowFile[ path.extname(item.name).substring(1) ];
+        return allowFile[ path.extname(item.name).substring(1).toLowerCase() ];
     });
 
     //存为数组以方便递归处理
@@ -52,7 +55,6 @@ function _savePsd(files, req, res) {
     function save() {
 
         if (files.length < 1) {
-            res.end(JSON.stringify({pass: pass, err: errorMsg}, undefined, '    '));
             unlink(tempFile);
             return;
         }
@@ -61,7 +63,7 @@ function _savePsd(files, req, res) {
 
         tempFile.push(cur.path);
 
-        var extName = path.extname(cur.name).substring(1).toLocaleLowerCase();
+        var extName = path.extname(cur.name).substring(1).toLowerCase();
 
         if (!allowFile[extName]) {
             return;
@@ -88,10 +90,10 @@ function _savePsd(files, req, res) {
                         height: cur.height,
                         path: path.basename(cur.path),
                         length: cur.length,
-                        category: 'WEB页面',
-                        color: '蓝色',
-                        date: '2012',
-                        series: "TMS",
+                        category: '',
+                        color: '',
+                        date: '',
+                        series: "",
                         tag: [],
                         timestamp: Date.now(),
                         sort: Date.now(),
@@ -101,7 +103,7 @@ function _savePsd(files, req, res) {
                     function (err /*,result*/) {
                         if (!err) {
 
-                            pass.push(fileId);
+                            pass.push({_id: fileId, width: cur.width});
 
                             var gs;
 
@@ -113,9 +115,9 @@ function _savePsd(files, req, res) {
                                 });
                                 gs.writeFile(cur.path, function (err) {
                                     if (!err) {
+
                                         console.log('保存PSD成功');
                                         console.log('正在转换PSD文件为jpg');
-
 
                                         var jpgPath = path.join(path.dirname(cur.path), fileId + '.jpg');
 
@@ -158,10 +160,17 @@ function _savePsd(files, req, res) {
                                 });
 
                                 gs.writeFile(cur.path, function (err) {
-                                    //先生成上传记录，再保存到gridFS
-                                    resize(cur, fileId, function () {
+                                    if (!err) {
+                                        //先生成上传记录，再保存到gridFS
+                                        console.log(cur.name + '保存成功，开始生成缩略图');
+                                        resize(cur, fileId, function () {
+                                            console.log(cur.name + '的缩略图生成完毕');
+                                            save();
+                                        });
+                                    } else {
+                                        console.log(cur.name + '处理失败' + err);
                                         save();
-                                    });
+                                    }
                                 });
                             }
 
@@ -200,6 +209,7 @@ function _savePsd(files, req, res) {
             }, function (err) {
                 if (!err) {
 
+                    console.log(curSize + '规格缩略图生成完毕');
                     tempFile.push(dstSrc);
 
                     var gs = new GridStore(DB.dbServer, fileId + '_' + curSize, "w", {
@@ -233,7 +243,7 @@ function unlink(list) {
         if (!err) {
             console.log(cur + 'already unlink');
         } else {
-            console.log('unlink fail');
+            console.log('unlink fail', err);
         }
         if (list.length > 0) unlink(list);
     })

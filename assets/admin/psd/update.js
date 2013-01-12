@@ -15,14 +15,9 @@ define(function (require, exports, module) {
         $this.toggleClass('checked');
     });
 
-    var $filter = $('#filter');
+    var $control = $('#control');
 
-    $filter.find('b.switch').click(function () {
-        $this = $(this);
-        $filter.toggleClass('min');
-    });
-
-    $(filter).find('[t]').live('click', function (e) {
+    $control.find('[t]').live('click', function (e) {
         $this = $(this);
         var type = $this.attr('t');
         var value = $this.attr('value');
@@ -39,7 +34,7 @@ define(function (require, exports, module) {
                 id: id.join(',')
             },
             function (data) {
-                console.log(data);
+                require('./filter').update();
             });
 
         e.preventDefault();

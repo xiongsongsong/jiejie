@@ -16,13 +16,19 @@
 
 define(function (require, exports, module) {
 
-
-    require('./init-data');
-
     require('./update');
+
+    require('./filter');
 
     //require('./sort');
 
     require('./drag-upload');
+
+    $('#filter,#control').tooltip({
+        selector: '.color span'
+    });
+
+    require('./helper');
+
 
 });

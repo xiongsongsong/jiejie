@@ -7,8 +7,12 @@
  */
 
 define(function (exports, require, module) {
+
     var $pic = $('#pic');
     var allowFile = ['jpg', 'jpeg', 'png', 'gif', 'psd'];
+    var $p = $('#p');
+
+    var cl;
 
     //拖进
     $pic.bind('dragenter', function (e) {
@@ -36,7 +40,7 @@ define(function (exports, require, module) {
         Object.keys(fileList).forEach(function (item) {
             var f = fileList[item];
             if (!f.name) return;
-            var ext = f.name.substring(f.name.lastIndexOf('.') + 1);
+            var ext = f.name.substring(f.name.lastIndexOf('.') + 1).toLowerCase();
             if (ext && allowFile.indexOf(ext) > -1) {
                 images.push(f);
             }
@@ -53,18 +57,36 @@ define(function (exports, require, module) {
         var xhr = new XMLHttpRequest();
         var url = '/admin/save-psd';
 
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                $p.html(xhr.responseText);
+                cl = setTimeout(function () {
+                    $p.parent().slideUp();
+                    $p.html('');
+                    $p.width('0');
+                }, 5000);
+            }
+        };
+
         if (images.length > 0) {
             xhr.open('post', url);
-            xhr.upload.addEventListener("progress", uploadProgress, false);
+
+            xhr.upload.addEventListener("progress", function (evt) {
+                var percent = Math.round(evt.loaded * 100 / evt.total);
+                $p.html(percent + '%').css('width', percent + '%');
+            }, false);
+
+
             xhr.send(formData);
+
+            if (cl) {
+                clearTimeout(cl);
+                cl = undefined;
+            }
+
+            $p.parent().slideDown();
         }
     };
-
-    function uploadProgress(evt) {
-        var percent = Math.round(evt.loaded * 100 / evt.total);
-        $('#p').html(percent + '%').css('width', percent + '%');
-    }
-
 });
 
 
