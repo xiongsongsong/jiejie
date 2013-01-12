@@ -28,7 +28,7 @@ exports.update = function (req, res) {
         {
             $set: update
         }, {multi: true}, function (err, docs) {
-            console.log(docs);
+            res.end('done');
         }
     )
 

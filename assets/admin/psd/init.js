@@ -30,5 +30,7 @@ define(function (require, exports, module) {
 
     require('./helper');
 
+    require('./delete');
+
 
 });

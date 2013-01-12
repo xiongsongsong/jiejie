@@ -17,6 +17,7 @@ exports.init = function (app) {
 
     //上传PSD
     app.post('/admin/save-psd', require('./save-psd').savePsd);
+    app.get('/admin/delete-psd', require('./delete-psd').delete);
 
     //管理PSD
     app.post('/admin/update-file', require('./update-file').update);

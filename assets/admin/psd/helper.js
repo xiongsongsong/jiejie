@@ -81,5 +81,15 @@ define(function (require, exports, module) {
                 break;
         }
 
+    });
+
+    $imgContainer.find('.pic').live('mouseenter mouseleave', function (e) {
+        var $this = $(this);
+        if (e.type === 'mouseenter') {
+            $this.append($('<b class="close">&times;</b>'));
+        } else {
+            $this.find('b.close').remove();
+        }
+
     })
 });

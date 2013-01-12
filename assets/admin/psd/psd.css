@@ -31,6 +31,17 @@
     color: #f2f2f2;
 }
 
+#container b.close {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .2);
+    padding: 12px;
+    font-size: 42px;
+    color: red;
+    opacity: 1;
+}
+
 #pic {
     position: relative;
     min-height: 100px;
@@ -123,6 +134,7 @@
     border: solid 1px #000;
     border-left-width: 6px;
     vertical-align: bottom;
+    white-space: nowrap;
 }
 
 .control-panel {
