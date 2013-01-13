@@ -458,10 +458,10 @@
 #fixed-image img {
     display: inline-block;
     vertical-align: middle;
+    zoom: 1;
 }
 
 .ks-ext-mask {
-    background: #000;
     filter: progid:DXImageTransform.Microsoft.gradient(enabled = 'true', startColorstr = '#7F000000', endColorstr = '#7F000000');
     background: rgba(0, 0, 0, 0.5);
     z-index: 9999999;
