@@ -31,3 +31,9 @@
 body {
     background: url(/global/images/body-bg.png);
 }
+
+#header img.nav{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}

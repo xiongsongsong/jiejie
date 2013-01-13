@@ -11,13 +11,17 @@
 
 <div id="header">
     <img class="logo" src="/global/images/logo.png" alt="杰杰设计">
-    <ul>
+    <!--<ul>
         <li id="about-nav">关于我们</li>
         <li id="wedo-nav">我们能做</li>
         <li id="portfolio-nav" class="checked">设计作品</li>
         <li id="design-nav">设计师</li>
         <li id="contact-nav">联系我们</li>
-    </ul>
+    </ul>-->
+    <img src="/global/images/nav.png" usemap="#Map" class="nav">
+    <map name="Map"><area shape="rect" class="notify-contact" coords="480,3,583,33" href="#copy-right"><area shape="rect" coords="360,2,463,32" href="#show"><area shape="rect" coords="242,2,345,32" href="#portfolio"><area shape="rect" coords="118,2,221,32" href="#what-we-do">
+        <area shape="rect" coords="3,3,106,33" href="#about">
+    </map>
 </div>
 
 <div id="banner">
@@ -142,7 +146,7 @@
             type: 'get',
             dataType: 'json',
             data: {
-                category: '风采秀'
+                category: '1风采秀'
             },
             success: function (data) {
                 var container = DOM.get('#ks-switchable-content');
