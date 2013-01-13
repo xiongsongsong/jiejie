@@ -23,7 +23,7 @@ exports.savePsd = function (req, res) {
 
     var files = Array.isArray(req.files.file) ? req.files.file : [req.files.file];
 
-    res.end('您上传了' + req.files.file.length + '个文件，服务器需要花费一些时间来处理，一般为几分钟以内。');
+    res.end('您上传了' + files.length + '个文件，服务器需要花费一些时间来处理，一般为几分钟以内。');
 
     //过滤掉后缀名不正确的文件
     files = files.filter(function (item) {
