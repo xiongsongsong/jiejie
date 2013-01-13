@@ -102,6 +102,7 @@
     position: relative;
     overflow: hidden;
     margin-top: 12px;
+    height: 420px;
     width: 992px;
 }
 
@@ -214,6 +215,7 @@
 #p {
     float: right;
     margin: 12px 0 0 0;
+    white-space: nowrap;
 }
 
 #p b {

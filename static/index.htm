@@ -423,7 +423,7 @@ KISSY.use("gallery/template/1.0/,dom,event,ajax,anim", function (S, Template, DO
             show()
         });
 
-        Event.on(window, 'resize scroll', center)
+        Event.on(window, 'resize scroll', center);
 
 
     });
@@ -447,6 +447,15 @@ KISSY.use("gallery/template/1.0/,dom,event,ajax,anim", function (S, Template, DO
 
         //默认执行一次
         Event.fire(window, 'scroll');
+
+
+        var cl;
+        var point = DOM.get('#point');
+        Event.on(window, 'scroll', function () {
+            S.Anim(point, {opacity: 0}, .1).run();
+        })
+
+
     });
 
     var copyRight = DOM.get('#copy-right');
