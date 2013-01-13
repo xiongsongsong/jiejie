@@ -125,6 +125,7 @@
 
 #portfolio-container b.pic-container {
     position: relative;
+    cursor: pointer;
 }
 
 #portfolio-container b.pic-container u.icon {
@@ -150,6 +151,7 @@
 
 #portfolio .nav-bar b {
     display: block;
+    cursor: pointer;
     width: 53px;
     height: 53px;
     border: solid 1px #e1e0e0;
