@@ -190,7 +190,7 @@
 
 <script type="tpl" id="tpl">
     {{#each docs as item index}}
-    <b class="pic-container"><span class="pic" data-id="{{item._id}}"
+    <b class="pic-container" data-id="{{item._id}}"><span class="pic"
                                    style="background-image:url(/file/{{item._id}}_170)"></span></b>
     {{/each}}
 </script>
@@ -305,6 +305,15 @@ KISSY.use("gallery/template/1.0/,dom,event,ajax,anim", function (S, Template, DO
         p[target.className]();
     });
 
+    Event.delegate('#portfolio-container', 'mouseenter mouseleave', 'b.pic-container', function (ev) {
+        var target = ev.currentTarget;
+        if (ev.type === 'mouseenter') {
+            DOM.append(DOM.create('<u class="icon"></u>'), target)
+        } else {
+            DOM.remove(DOM.get('u.icon', target));
+        }
+    });
+
 
     function findFile() {
         var category = DOM.get('b.checked', '#nav-field');
@@ -361,7 +370,7 @@ KISSY.use("gallery/template/1.0/,dom,event,ajax,anim", function (S, Template, DO
         }
 
         var index = 0;
-        Event.delegate('#portfolio-container', 'mousedown', '.pic', function (ev) {
+        Event.delegate('#portfolio-container', 'mousedown', '.pic-container', function (ev) {
             var target = ev.currentTarget;
             var id = DOM.attr(target, 'data-id');
             S.each(currentData, function (item, i) {
@@ -452,8 +461,15 @@ KISSY.use("gallery/template/1.0/,dom,event,ajax,anim", function (S, Template, DO
         var cl;
         var point = DOM.get('#point');
         Event.on(window, 'scroll', function () {
-            S.Anim(point, {opacity: 0}, .1).run();
-        })
+            if (S.Anim.isRunning(point))  return;
+            S.Anim(point, {opacity: 0}, .1, 'easeNone',function () {
+                if (cl) clearTimeout(cl);
+                cl = setTimeout(function () {
+                    S.Anim.stop(point, false);
+                    S.Anim(point, {opacity: 1}, .2).run();
+                }, 500)
+            }).run();
+        });
 
 
     });
