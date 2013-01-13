@@ -232,8 +232,16 @@
     background-position: -194px 0;
 }
 
+#p b.prev:hover {
+    background-position: -194px -20px;
+}
+
 #p b.next {
     background-position: -228px 0;
+}
+
+#p b.next:hover {
+    background-position: -228px -20px;
 }
 
 #show .scrollable {
@@ -406,10 +414,13 @@
 }
 
 #fixed-image {
-    width: 800px;
-    height: 800px;
+    height: 700px;
+    width: 670px;
     overflow: hidden;
     text-align: center;
+    border: solid 10px #fff;
+    box-shadow: 0 0 5px rgba(255, 255, 255, .5);
+    background: #fff;
 }
 
 #fixed-image i {
@@ -420,10 +431,14 @@
     overflow: hidden;
 }
 
+#fixed-image span {
+    display: inline-block;
+
+}
+
 #fixed-image img {
     display: inline-block;
     vertical-align: middle;
-    box-shadow: 0 0 5px #000;
 }
 
 .ks-ext-mask {
@@ -481,6 +496,11 @@
     display: block;
     height: 56px;
     vertical-align: top;
+    margin-right: 5px;
+}
+
+#point a.active {
+    border-right: solid 3px #eb610f;
 }
 
 #point a.home {
@@ -551,6 +571,33 @@
     overflow: hidden;
 }
 
-.ks-overlay{
+.ks-overlay {
     outline: none;
+}
+
+#fixed-image b.prev-image,
+#fixed-image b.next-image {
+    position: absolute;
+    background: url(/global/images/c.png);
+    width: 89px;
+    height: 89px;
+    top: 300px;
+    cursor: pointer;
+}
+
+#fixed-image b.prev-image {
+    left: -100px;
+}
+
+#fixed-image b.next-image {
+    right: -122px;
+    background-position: right 0;
+}
+
+#fixed-image b.prev-image:hover {
+    background-position: 0 bottom;
+}
+
+#fixed-image b.next-image:hover {
+    background-position: right bottom;
 }

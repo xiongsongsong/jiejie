@@ -51,7 +51,7 @@
                 <a href="#what-we-do"></a>
                 <a href="#portfolio"></a>
                 <a href="#show"></a>
-                <a href="#copy-right"></a>
+                <a class="notify-contact" href="#copy-right"></a>
             </div>
         </div>
     </div>
@@ -330,7 +330,7 @@ KISSY.use("gallery/template/1.0/,dom,event,ajax,anim", function (S, Template, DO
 
     KISSY.use("ua,event,node,overlay", function (S, UA, Event, Node, O) {
         var dialog = new O.Dialog({
-            width: 800,
+            width: 670,
             elCls: 'my',
             aria: false,
             highlighted: false,
@@ -360,8 +360,6 @@ KISSY.use("gallery/template/1.0/,dom,event,ajax,anim", function (S, Template, DO
             }
         }
 
-        Event.on(window, "scroll resize", center);
-
         var index = 0;
         Event.delegate('#portfolio-container', 'mousedown', '.pic', function (ev) {
             var target = ev.currentTarget;
@@ -373,36 +371,59 @@ KISSY.use("gallery/template/1.0/,dom,event,ajax,anim", function (S, Template, DO
                 }
             });
 
-            var cur = currentData[index];
-            dialog.set('bodyContent', '<div id="fixed-image" style="width: 800px;"><i></i><img src="/file/' + cur._id + (cur.width >= 670 ? '_670' : '') + '"></div> ');
-            dialog.set('height', DOM.viewportHeight());
-            show();
-            dialog.center();
+            render()
 
         });
+
+        function render() {
+            var cur = currentData[index];
+            dialog.set('bodyContent', '<div id="fixed-image"><b class="prev-image"></b><b class="next-image"></b><i></i><span><a href="/file/' + cur._id + '" target="_blank"><img src="/file/' + cur._id + (cur.width >= 670 ? '_670' : '') + '"></a></span></div> ');
+
+            show();
+        }
 
         Event.on(document, 'keydown', function (ev) {
             var c = ev.keyCode;
             if (c === 27) dialog.hide();
             if (dialog.get("visible") && c === 39 || c === 40 || c == 37 || c == 38) {
                 if (c === 39 || c === 40) {
-                    index++;
-                    if (index > currentData.length - 1) index = currentData.length - 1;
+                    next();
                 } else if (ev.keyCode == 37 || ev.keyCode == 38) {
-                    index--;
-                    if (index < 0) index = 0;
+                    prev();
                 }
-                var cur = currentData[index];
-                dialog.set('bodyContent', '<div id="fixed-image" style="width: 800px;"><i></i><img src="/file/' + cur._id + (cur.width >= 670 ? '_670' : '') + '"></div> ');
                 ev.preventDefault();
-
             }
         });
 
+
+        function next() {
+            index++;
+            if (index > currentData.length - 1) index = currentData.length - 1;
+            render();
+
+        }
+
+        function prev() {
+            index--;
+            if (index < 0) index = 0;
+            render();
+        }
+
+        Event.delegate(document.body, 'mousedown', '.prev-image', function (ev) {
+            prev();
+        });
+
+        Event.delegate(document.body, 'mousedown', '.next-image', function (ev) {
+            next();
+        });
+
+
         Event.on('#team', 'click', function () {
-            dialog.set('bodyContent', '<div id="fixed-image" style="width: 800px;"><i></i><a href="http://www.jeef.com.cn:1280/file/50f29d76c8d870f843000007" target="_blank"><img src="http://www.jeef.com.cn:1280/file/50f29d76c8d870f843000007_670" /></a></div> ');
+            dialog.set('bodyContent', '<div id="fixed-image"><i></i><a href="http://www.jeef.com.cn:1280/file/50f29d76c8d870f843000007" target="_blank"><img src="http://www.jeef.com.cn:1280/file/50f29d76c8d870f843000007_670" /></a></div> ');
             show()
         });
+
+        Event.on(window, 'resize scroll', center)
 
 
     });
@@ -436,8 +457,8 @@ KISSY.use("gallery/template/1.0/,dom,event,ajax,anim", function (S, Template, DO
         var index = 0;
 
         function anim() {
-            console.log(index % 2 === 0 ? '#aaa' : '#dcdcdc')
-            S.Anim(copyRight, {'background-color': index % 2 === 0 ? '#b5b5b5' : '#dcdcdc'}, .15, 'easeNone',function () {
+            S.Anim.stop(copyRight, false);
+            S.Anim(copyRight, {'background-color': index % 2 === 0 ? '#c9c9c9' : '#dcdcdc'}, .1, 'easeNone',function () {
                 index++;
                 if (index < 6) anim();
             }).run()
@@ -447,7 +468,11 @@ KISSY.use("gallery/template/1.0/,dom,event,ajax,anim", function (S, Template, DO
 
     });
 
-
+    Event.delegate('#point', 'mousedown', 'a', function (ev) {
+        var target = ev.target;
+        DOM.removeClass(DOM.siblings(target), 'active');
+        DOM.addClass(target, 'active');
+    });
 });
 
 </script>
