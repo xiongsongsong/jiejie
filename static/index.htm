@@ -148,7 +148,7 @@
                 var container = DOM.get('#ks-switchable-content');
                 var li = '';
                 S.each(data.docs, function (item) {
-                    li += '<div class="pic" data-id="' + item._id + '" style="background-image:url(/file/' + item._id + '_310)"></div>'
+                    li += '<div class="pic" data-id="' + item._id + '" style="background-image:url(/file/' + item._id + ')"></div>'
                 });
                 DOM.html(container, li);
                 //通过DOM元素新建旋转木马
@@ -191,7 +191,7 @@
 <script type="tpl" id="tpl">
     {{#each docs as item index}}
     <b class="pic-container"><span class="pic" data-id="{{item._id}}"
-                                   style="background-image:url(/file/{{item._id}})"></span></b>
+                                   style="background-image:url(/file/{{item._id}}_170)"></span></b>
     {{/each}}
 </script>
 
