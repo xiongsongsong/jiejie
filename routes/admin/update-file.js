@@ -19,7 +19,7 @@ exports.update = function (req, res) {
     var update = Object.create(null);
 
     Object.keys(body).forEach(function (k) {
-        if (type.indexOf(k) > -1) update[k] = body[k]
+        if (type.indexOf(k) > -1) update[k] = body[k] && body[k].trim().length > 0 ? body[k].trim() : '';
     });
 
     collection.update(
