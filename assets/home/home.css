@@ -662,8 +662,7 @@
     position: absolute;
     width: 164px;
     overflow: hidden;
-    padding: 15px 0;
-    margin-bottom: 20px;
+    padding: 8px 0;
     text-align: center;
     left: -9999px;
     top: -9999px;
@@ -693,7 +692,7 @@
 }
 
 #container .ks-waterfall .content p {
-    padding: 0 1em 0 2em;
+    padding: 0 1em;
     text-align: left;
     font-size: 12px;
 }
