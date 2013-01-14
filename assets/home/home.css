@@ -42,6 +42,7 @@
 .item {
     width: 990px;
     margin: 0 auto;
+    zoom: 1;
 }
 
 .item h2.title {
@@ -546,6 +547,10 @@
     width: 100%;
 }
 
+.ks-ie7 #banner-switch .ks-switchable-nav {
+    display: none;
+}
+
 #banner-switch .ks-switchable-nav {
     position: absolute;
     z-index: 333;
@@ -589,6 +594,18 @@
     height: 154px;
     overflow: hidden;
     position: relative;
+}
+
+#team-container .ks-switchable-content a {
+    display: block;
+    width: 250px;
+    height: 166px;
+}
+
+#team-container .ks-switchable-content img {
+    display: block;
+    width: 250px;
+    height: 166px;
 }
 
 #team-container .ks-switchable-nav {
@@ -668,12 +685,16 @@
     top: -9999px;
 }
 
-#container .ks-waterfall  span {
+#container .ks-waterfall span {
     width: 164px;
     height: 104px;
     position: relative;
     display: block;
     text-align: center;
+}
+
+#container .ks-waterfall span img {
+    display: inlin;
 }
 
 #container .ks-waterfall  span s {
