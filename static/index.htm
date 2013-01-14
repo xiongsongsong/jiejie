@@ -462,20 +462,6 @@ KISSY.use("gallery/template/1.0/,dom,event,ajax,anim", function (S, Template, DO
         Event.fire(window, 'scroll');
 
 
-        var cl;
-        var point = DOM.get('#point');
-        Event.on(window, 'scroll', function () {
-            if (S.Anim.isRunning(point))  return;
-            S.Anim(point, {opacity: 0}, .1, 'easeNone',function () {
-                if (cl) clearTimeout(cl);
-                cl = setTimeout(function () {
-                    S.Anim.stop(point, false);
-                    S.Anim(point, {opacity: 1}, .2).run();
-                }, 500)
-            }).run();
-        });
-
-
     });
 
     var copyRight = DOM.get('#copy-right');
