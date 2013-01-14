@@ -32,10 +32,10 @@
             <div class="scroller">
                 <div class="ks-switchable-content">
                     <div class="banner contact"
-                         style="background-image: url(http://www.jeef.com.cn:1280/file/50f258368d1858a03b002867)"><p><a
+                         style="background-image: url(/file/50f258368d1858a03b002867)"><p><a
                             href="#copy-right" class="notify-contact">联系我们</a></p></div>
                     <div class="banner"
-                         style="background-image: url(http://www.jeef.com.cn:1280/file/50f2d637d5c2a5ad4b00000d)"></div>
+                         style="background-image: url(/file/50f2d637d5c2a5ad4b00000d)"></div>
                 </div>
             </div>
         </div>
@@ -63,10 +63,14 @@
         <div id="team-container" class="s-demo scrollable">
             <div class="scroller">
                 <div class="ks-switchable-content">
-                    <a href="#"><img src="http://www.jeef.com.cn:1280/file/50f3dfd18b5c18c166000c56_250"></a>
-                    <a href="#"><img src="http://www.jeef.com.cn:1280/file/50f3dfc18b5c18c166000a31_250"></a>
-                    <a href="#"><img src="http://www.jeef.com.cn:1280/file/50f3dfae8b5c18c16600072b_250"></a>
-                    <a href="#"><img src="http://www.jeef.com.cn:1280/file/50f3df9c8b5c18c166000486_250"></a>
+                    <a href="/file/50f3dfd18b5c18c166000c56" target="_blank"><img
+                            src="/file/50f3dfd18b5c18c166000c56_250"></a>
+                    <a href="/file/50f3dfc18b5c18c166000a31" target="_blank"><img
+                            src="/file/50f3dfc18b5c18c166000a31_250"></a>
+                    <a href="/file/50f3dfae8b5c18c16600072b" target="_blank"><img
+                            src="/file/50f3dfae8b5c18c16600072b_250"></a>
+                    <a href="/file/50f3df9c8b5c18c166000486" target="_blank"><img
+                            src="/file/50f3df9c8b5c18c166000486_250"></a>
                 </div>
             </div>
         </div>
@@ -129,23 +133,16 @@
     <div id="portfolio-container">
 
     </div>
-    <div id="p" class="clearfix"><b class="prev">上一页</b> <b class="next">下一页</b></div>
+    <div id="p" class="pagination clearfix"><b class="prev">上一页</b> <b class="next">下一页</b></div>
 </div>
 
 <div id="show" class="item">
     <img src="/global/images/mien.png">
 
-    <div id="demo6" class="s-demo scrollable">
-        <span id="scroller-prev" class="prev disable">&lsaquo; 上一页</span>
-        <span id="scroller-next" class="next">下一页 &rsaquo;</span>
+    <div id="container" style="position: relative;">
 
-        <div class="scroller">
-            <div class="ks-switchable-content" id="ks-switchable-content">
-
-            </div>
-
-        </div>
     </div>
+    <div id="water-pagination" class="pagination clearfix"><b class="prev">上一页</b> <b class="next">下一页</b></div>
 </div>
 
 
@@ -154,50 +151,22 @@
     KISSY.use("event,dom,switchable,datalazyload,ajax", function (S, Event, DOM, Switchable) {
         var Carousel = Switchable.Carousel;
 
-        KISSY.io({
-            url: '/filter',
-            type: 'get',
-            dataType: 'json',
-            data: {
-                category: '风采秀'
-            },
-            success: function (data) {
-                var container = DOM.get('#ks-switchable-content');
-                var li = '';
-                S.each(data.docs, function (item) {
-                    li += '<div class="pic" data-id="' + item._id + '" style="background-image:url(/file/' + item._id + '_24)"></div>'
-                });
-                DOM.html(container, li);
-                //通过DOM元素新建旋转木马
-                var carousel = new Carousel('#demo6', {
-                    effect: 'scrollx',
-                    easing: 'easeOutStrong',
-                    steps: 7,
-                    viewSize: [987],
-                    circular: false,
-                    hasTriggers: false,
-                    prevBtnCls: 'prev',
-                    nextBtnCls: 'next',
-                    //autoplay:true,//是否自动切换
-                    disableBtnCls: 'disable',
-                    lazyDataType: 'img-src'
-                });
-
-            }
-        });
 
         var banner = new Switchable.Slide('#banner-switch', {
             effect: 'fade',
             easing: 'easeOutStrong',
-            autoplay: true,
-            delay: 1
+            triggerType: 'mouse',
+            delay: 0,
+            autoplay: true
         });
 
         var team = new Switchable.Slide('#team-container', {
             effect: 'fade',
             easing: 'easeOutStrong',
             autoplay: true,
-            delay: 1
+            triggerType: 'mouse',
+            interval: 2.3,
+            delay: 0
         });
 
         Event.on('#scroller-prev-banner', 'mousedown', function () {
@@ -219,6 +188,21 @@
     {{/each}}
 </script>
 
+
+<script type="text/tpl" id="water-tpl">
+    {{#each docs as item index}}
+    <div class="ks-waterfall">
+        <span><img src="/file/{{item._id}}"><s class="mask"></s></span>
+
+        <div class="content">
+            <h2>{{item.title}}</h2>
+
+            <p>{{item.describe}}</p>
+        </div>
+    </div>
+    {{/each}}
+</script>
+
 <div id="copy-right">
     <div class="item">
         <p class="copyright">Copyright &copy; 2012 jiejie. All rights reserved.</p>
@@ -235,7 +219,6 @@ KISSY.use("gallery/template/1.0/,dom,event,ajax,anim", function (S, Template, DO
 
     var waterFall = DOM.get('#filter-waterfall');
 
-    var tpl = DOM.get('#tpl').innerHTML;
 
     Event.delegate('#nav-field', 'mousedown', 'b', function (ev) {
         var target = ev.currentTarget;
@@ -279,50 +262,50 @@ KISSY.use("gallery/template/1.0/,dom,event,ajax,anim", function (S, Template, DO
 
     var currentData = [];
 
-    var num = 10;//每页显示多少条
-    var idx = 1;
 
-    function P() {
+    function P(id, tpl, num) {
 
         this.data = [];
         var self = this;
+        self.idx = 1;
+        self.num = num;
 
         function go() {
             var curDate;
-            if (self.data.length > num) {
-                curDate = self.data.slice((idx - 1) * num, (idx - 1) * num + num);
+            if (self.data.length > self.num) {
+                curDate = self.data.slice((self.idx - 1) * self.num, (self.idx - 1) * self.num + self.num);
             } else {
                 curDate = self.data;
             }
-            DOM.get('#portfolio-container').innerHTML = Template(tpl).render({docs: curDate});
+            DOM.get(id).innerHTML = Template(tpl).render({docs: curDate})
         }
 
         this.render = function (data) {
-            self.totalPage = Math.ceil(data.docs.length / num);
+            self.totalPage = Math.ceil(data.docs.length / self.num);
             self.data = data.docs;
             go();
         };
 
         this.next = function () {
-            idx++;
-            if (idx > self.totalPage) {
-                idx = self.totalPage;
+
+            self.idx++;
+            if (self.idx > self.totalPage) {
+                self.idx = self.totalPage;
             }
             go();
         };
 
         this.prev = function () {
-            idx--;
-            if (idx < 1) {
-                idx = 1;
+            self.idx--;
+            if (self.idx < 1) {
+                self.idx = 1;
             }
             go();
         }
 
-
     }
 
-    var p = new P();
+    var p = new P('#portfolio-container', DOM.get('#tpl').innerHTML, 10);
 
     Event.delegate('#p', 'mousedown', 'b', function (ev) {
         var target = ev.target;
@@ -348,13 +331,12 @@ KISSY.use("gallery/template/1.0/,dom,event,ajax,anim", function (S, Template, DO
             type: "get",
             dataType: "json",
             data: data,
-            //http://localhost/filter?category=WEB&date=2011
             success: function (data) {
                 data.docs = S.filter(data.docs, function (item) {
                     return item.width > 250 && item.height > 250;
                 });
                 currentData = data.docs;
-                idx = 1;
+                p.idx = 1;
                 p.render(data);
 
             }
@@ -502,6 +484,41 @@ KISSY.use("gallery/template/1.0/,dom,event,ajax,anim", function (S, Template, DO
         var target = ev.target;
         DOM.removeClass(DOM.siblings(target), 'active');
         DOM.addClass(target, 'active');
+    });
+
+
+    KISSY.io({
+        url: '/filter',
+        type: 'get',
+        dataType: 'json',
+        data: {
+            category: '风采秀'
+        },
+        success: function (data) {
+            KISSY.use("waterfall", function (S, Waterfall) {
+                var p = new P('#container', DOM.get('#water-tpl').innerHTML, 15);
+                p.render(data);
+                render();
+
+                /* Event.delegate('#p', 'mousedown', 'b', function (ev) {
+                 var target = ev.target;
+                 p[target.className]();
+                 });*/
+                Event.delegate('#water-pagination', 'mousedown', 'b', function (ev) {
+                    var target = ev.target;
+                    p[target.className]();
+                    render();
+                });
+
+                function render() {
+                    new Waterfall({
+                        container: "#container",    //节点容器
+                        minColCount: 5,             //最小列数
+                        colWidth: 203               //每列的宽度
+                    });
+                }
+            });
+        }
     });
 });
 

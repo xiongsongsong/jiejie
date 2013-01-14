@@ -28,7 +28,7 @@
 .item h3 span s,
 .item h2.title,
 #about .overview,
-#p b,
+.pagination b,
 #copy-right .phone s,
 #copy-right .email s,
 #portfolio .nav-bar b,
@@ -238,13 +238,13 @@
     display: none;
 }
 
-#p {
+.pagination {
     float: right;
     margin: 12px 0 0 0;
     white-space: nowrap;
 }
 
-#p b {
+.pagination b {
     width: 18px;
     float: left;
     height: 18px;
@@ -256,19 +256,19 @@
     cursor: pointer;
 }
 
-#p b.prev {
+.pagination b.prev {
     background-position: -194px 0;
 }
 
-#p b.prev:hover {
+.pagination b.prev:hover {
     background-position: -194px -20px;
 }
 
-#p b.next {
+.pagination b.next {
     background-position: -228px 0;
 }
 
-#p b.next:hover {
+.pagination b.next:hover {
     background-position: -228px -20px;
 }
 
@@ -583,7 +583,6 @@
     height: 154px;
     left: 372px;
     top: 237px;
-    border: solid 1px red;
 }
 
 #team-container .ks-switchable-content {
@@ -596,7 +595,7 @@
     position: absolute;
     width: 100%;
     left: 0;
-    bottom: -20px;
+    bottom: -22px;
     text-align: center;
 }
 
@@ -606,9 +605,15 @@
     _display: inline;
     zoom: 1;
     width: 30px;
-    height: 2px;
-    background: #c2c2c2;
+    height: 8px;
+    border-top: solid 2px #c2c2c2;
     text-indent: -999em;
+    margin: 0 2px;
+    cursor: pointer;
+}
+
+#team-container .ks-switchable-nav li.ks-active {
+    border-color: #eb610f;
 }
 
 .ks-ext-close {
@@ -651,4 +656,53 @@
 
 #fixed-image b.next-image:hover {
     background-position: right bottom;
+}
+
+.ks-waterfall {
+    position: absolute;
+    width: 164px;
+    overflow: hidden;
+    padding: 15px 0;
+    margin-bottom: 20px;
+    text-align: center;
+    left: -9999px;
+    top: -9999px;
+}
+
+#container .ks-waterfall  span {
+    width: 164px;
+    height: 104px;
+    position: relative;
+    display: block;
+    text-align: center;
+}
+
+#container .ks-waterfall  span s {
+    position: absolute;
+    left: 8px;
+    top: 0;
+    width: 164px;
+    height: 104px;
+    background: url(/global/images/w.png);
+}
+
+#container .ks-waterfall .content {
+    background: #ecebed url(/global/images/cire-b.png) 0 bottom no-repeat;
+    padding-bottom: .5em;
+    position: relative;
+}
+
+#container .ks-waterfall .content p {
+    padding: 0 1em 0 2em;
+    text-align: left;
+    font-size: 12px;
+}
+
+#container .ks-waterfall h2 {
+    width: 164px;
+    text-indent: 12px;
+    line-height: 40px;
+    text-align: left;
+    height: 38px;
+    background: url(/global/images/h.png);
 }
