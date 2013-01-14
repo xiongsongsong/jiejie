@@ -16,7 +16,7 @@ exports.find = function (req, res) {
 
     var collection = new DB.mongodb.Collection(DB.client, 'files');
 
-    var fields = {_id: 1, fileName: 1, width: 1, height: 1};
+    var fields = {_id: 1, fileName: 1, width: 1, height: 1, title: 1, describe: 1};
 
     if (query._id) {
         fields.title = 1;
