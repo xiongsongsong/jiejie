@@ -60,8 +60,12 @@
 
 <div id="about" class="item">
     <div id="team">
-        <div id="team-container">
-
+        <div id="team-container" class="s-demo scrollable">
+            <div class="scroller">
+                <div class="ks-switchable-content">
+                    <a href="#"><img src="http://www.jeef.com.cn:1280/file/50f3dfd18b5c18c166000c56_250"></a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -77,6 +81,7 @@
     <div class="nav-bar" id="nav-field">
         <b id="category-field" class="category" data-field="category">按类型</b>
         <b id="color-field" class="color" data-field="color">按色系</b>
+        <b id="date-field" class="date" data-field="date">按年份</b>
         <b id="series-field" class="series" data-field="series">按系列</b>
     </div>
     <div id="filter-waterfall" class="clearfix">
@@ -101,6 +106,14 @@
             <b data-value="紫色" style="width: 82px;border-bottom-color:#892BCF;">紫色</b>
             <b data-value="白色" style="width: 88px;border-bottom-color:white;">白色</b>
             <b data-value="配色" style="width: 82px;border-bottom-color: #df6053;">配色</b>
+        </div>
+        <div>
+            <b data-value="2008" style="width: 165px;">2008</b>
+            <b data-value="2009" style="width: 165px;">2009</b>
+            <b data-value="2010" style="width: 165px;">2010</b>
+            <b data-value="2011" style="width: 165px;">2011</b>
+            <b data-value="2012" style="width: 165px;">2012</b>
+            <b data-value="2013" style="width: 165px;">2013</b>
         </div>
         <div>
             <b data-value="清爽系" style="width: 198px;">清爽系</b>
@@ -171,6 +184,13 @@
         });
 
         var banner = new Switchable.Slide('#banner-switch', {
+            effect: 'fade',
+            easing: 'easeOutStrong',
+            autoplay: true,
+            delay: 1
+        });
+
+        var team = new Switchable.Slide('#team-switch', {
             effect: 'fade',
             easing: 'easeOutStrong',
             autoplay: true,
