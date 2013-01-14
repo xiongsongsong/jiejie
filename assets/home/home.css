@@ -726,3 +726,15 @@
     height: 38px;
     background: url(/global/images/h.png);
 }
+
+#browser-tips {
+    padding: 10em 1em;
+    color: #fff;
+    font-size: 24px;
+    background: #37a647;
+    display: none;
+}
+
+#browser-tips a {
+    color: #fff;
+}

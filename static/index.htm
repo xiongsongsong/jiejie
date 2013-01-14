@@ -8,7 +8,15 @@
     <link rel="stylesheet" href="/home/home.css">
 </head>
 <body>
+<div id="browser-tips" class="item">
+    <h1>您的浏览器过于陈旧</h1>
 
+    <p>请升级您的浏览器，以便正常使用该页面。之后，您的上网体验、速度、安全性将得到提高！这几乎是一劳永逸的事情！</p>
+    <p>您可以从以下三种浏览器中选择一款！</p>
+
+    <p><a href="http://www.google.com.hk/chrome">Google Chrome</a>、<a href="http://firefox.com.cn/">Firefox</a>、<a
+            href="http://windows.microsoft.com/zh-CN/windows/upgrade-your-browser">Internet Explorer</a>、</p>
+</div>
 <div id="header">
     <img class="logo" src="/global/images/logo.png" alt="杰杰设计">
 
@@ -218,7 +226,10 @@
 </div>
 
 <script type="text/javascript">
-KISSY.use("gallery/template/1.0/,dom,event,ajax,anim", function (S, Template, DOM, Event, io) {
+KISSY.use("ua,gallery/template/1.0/,dom,event,ajax,anim", function (S, UA, Template, DOM, Event, io) {
+    if (KISSY.UA.ie && KISSY.UA.ie < 8) {
+        DOM.show('#browser-tips');
+    }
 
     var waterFall = DOM.get('#filter-waterfall');
 
