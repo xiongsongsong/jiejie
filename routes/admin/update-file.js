@@ -13,13 +13,15 @@ exports.update = function (req, res) {
     var body = req.body;
     var collection = new DB.mongodb.Collection(DB.client, 'files');
 
-    var type = ['category', 'color', 'date', 'series'];
-    if (type.indexOf(body.type) < 0) {
-        res.end({error: 'deny type'});
-        return;
-    }
+    var type = ['category', 'color', 'date', 'series', 'title', 'describe'];
+
     var update = Object.create(null);
-    update[body.type] = body.value;
+
+    Object.keys(body).forEach(function (k) {
+        if (type.indexOf(k) > -1) {
+            update[k] = body[k]
+        }
+    });
 
     collection.update(
         {

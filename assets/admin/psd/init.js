@@ -18,6 +18,8 @@ define(function (require, exports, module) {
 
     require('./update');
 
+    require('./edit');
+
     require('./filter');
 
     //require('./sort');

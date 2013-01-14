@@ -16,7 +16,14 @@ exports.find = function (req, res) {
 
     var collection = new DB.mongodb.Collection(DB.client, 'files');
 
-    collection.find(query, {_id: 1, fileName: 1, width: 1, height: 1}).sort([
+    var fields = {_id: 1, fileName: 1, width: 1, height: 1};
+
+    if (query._id) {
+        fields.title = 1;
+        fields.describe = 1;
+    }
+
+    collection.find(query, fields).sort([
             ['_id', -1]
         ]).toArray(function (err, docs) {
             res.header('content-type', 'application/json;charset=utf-8');

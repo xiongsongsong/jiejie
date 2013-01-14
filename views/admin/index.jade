@@ -1,6 +1,23 @@
 extends layout
 block content
     #container
+        #edit
+            form(name="edit")
+                input.id(type="hidden",name="id")
+                #edit-container
+                    fieldset
+                        legend 修改
+                            span.tips
+                        a.img(target='_blank')
+                            img
+                        p
+                            input(type="text",name='title',placeholder="请输入标题")
+                        p
+                            textarea(name="describe",placeholder="请输入文本")
+                        p
+                            button.btn.btn-primary.save(type="submit") 保存并关闭
+                            button.btn.continue(type="submit") 保存并编辑下一张图片
+                            button.btn.cancel(type="button")  取消
         #filter.control-panel(data-on="筛选文件",data-off="隐藏")
         #control.control-panel(data-on="文件归类",data-off="隐藏")
             .filter-container

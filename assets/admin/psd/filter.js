@@ -50,7 +50,8 @@ define(function (require, exports, module) {
         var li = '';
         for (var i = 0; i < data.docs.length; i++) {
             var cur = data.docs[i];
-            li += '<div class="pic" data-id="' + cur._id + '"><div class="img"><i></i><img src="/file/' + cur._id + (cur.width > 170 ? '_170' : '') + '"></div></div>';
+            li += '<div class="pic" data-id="' + cur._id + '"><div class="img"><i></i><img src="/file/' + cur._id + (cur.width > 170 ? '_170' : '') + '" alt="' + cur.fileName + '"></div>' +
+                '<b class="edit">编辑</b></div>';
         }
         $('#img-container').html(li);
     }

@@ -42,6 +42,17 @@
     opacity: 1;
 }
 
+#container .pic b.edit {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .5);
+    padding: .5em 1em;
+    font-weight: normal;
+    cursor: pointer;
+    color: #fff;
+}
+
 #pic {
     position: relative;
     min-height: 100px;
@@ -137,7 +148,7 @@
     white-space: nowrap;
 }
 
-.control-panel {
+.control-panel, #edit {
     position: fixed;
     left: 500px;
     top: 0;
@@ -175,4 +186,55 @@ b.switch {
 
 #filter {
     left: 0;
+}
+
+#edit {
+    left: 50%;
+    top: auto;
+    right: auto;
+    width: 478px;
+    padding: 10px;
+    bottom: -260px;
+    margin-left: -240px;
+    height: 230px;
+    background: rgba(255, 255, 255, .8);
+    z-index: 96;
+    -webkit-transition: -webkit-transform .2s ease-in, all .2s ease-in;
+    -moz-transition: -moz-transform .2s ease-in, all .2s ease-in;
+    -o-transition: -o-transform .2s ease-in, all .2s ease-in;
+    transition: transform .2s ease-in, all .2s ease-in;
+}
+
+#edit.show {
+    bottom: 0;
+}
+
+#edit button {
+    margin-right: 1em;
+}
+
+#edit a.img {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    height: 120px;
+    width: 120px;
+    background: #fff;
+    overflow: hidden;
+    box-shadow: 0 0 4px rgba(0, 0, 0, .3);
+}
+
+#edit a.img img {
+    width: auto;
+    height: auto;
+}
+
+#edit input,
+#edit textarea {
+    width: 300px;
+}
+
+#edit span.tips {
+    font-size: 14px;
+    margin-left: .5em;
 }
