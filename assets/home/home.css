@@ -35,8 +35,7 @@
 #show .scrollable .prev,
 #show .scrollable .next,
 #point,
-#banner-switch .scroller .contact p a,
-#team {
+#banner-switch .scroller .contact p a {
     background-image: url(/global/images/sprites.png);
 }
 
@@ -572,14 +571,12 @@
 
 #team {
     position: absolute;
-    width: 264px;
-    height: 158px;
-    left: 368px;
-    top: 239px;
+    width: 244px;
+    height: 154px;
+    left: 372px;
+    top: 237px;
     overflow: hidden;
-    background-position: -9999em -9999em;
-    background-repeat: no-repeat;
-    cursor: pointer;
+    border: solid 1px #eee;
 }
 
 .ks-ext-close {

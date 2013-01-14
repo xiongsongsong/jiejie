@@ -11,28 +11,67 @@
     top: 26px;
 }
 
-#header ul {
+#header p {
     position: absolute;
-    right: 0;
+    right: 1em;
     bottom: 0;
+    margin: 0;
+    padding: 0;
 }
 
-#header ul li {
-    float: left;
-    margin: 0 19px;
-    border-bottom: solid 4px #f4f4f6;
-    padding: 0 21px 8px 21px;
+#header p a {
+    display: inline-block;
+    background: url(/global/images/nav.png) no-repeat;
+    width: 110px;
+    text-indent: -999em;
+    overflow: hidden;
 }
 
-#header ul li.checked {
-    border-color: #eb610f;
+#header p #about-nav {
+    background-position: 29px 0;
+}
+
+#header p #about-nav:hover {
+    background-position: 29px -29px;
+}
+
+#header p #wedo-nav {
+    background-position: -89px 0;
+}
+
+#header p #wedo-nav:hover {
+    background-position: -89px -29px;
+}
+
+#header p #portfolio-nav {
+    background-position: -212px 0;
+}
+
+#header p #portfolio-nav:hover {
+    background-position: -212px -29px;
+}
+
+#header p #design-nav {
+    background-position: -336px 0;
+}
+
+#header p #design-nav:hover {
+    background-position: -336px -29px;
+}
+
+#header p #contact-nav {
+    background-position: -456px 0;
+}
+
+#header p #contact-nav:hover {
+    background-position: -456px -29px;
 }
 
 body {
     background: url(/global/images/body-bg.png);
 }
 
-#header img.nav{
+#header img.nav {
     position: absolute;
     right: 0;
     bottom: 0;

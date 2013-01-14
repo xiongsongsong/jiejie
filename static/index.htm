@@ -11,17 +11,14 @@
 
 <div id="header">
     <img class="logo" src="/global/images/logo.png" alt="杰杰设计">
-    <!--<ul>
-        <li id="about-nav">关于我们</li>
-        <li id="wedo-nav">我们能做</li>
-        <li id="portfolio-nav" class="checked">设计作品</li>
-        <li id="design-nav">设计师</li>
-        <li id="contact-nav">联系我们</li>
-    </ul>-->
-    <img src="/global/images/nav.png" usemap="#Map" class="nav">
-    <map name="Map"><area shape="rect" class="notify-contact" coords="480,3,583,33" href="#copy-right"><area shape="rect" coords="360,2,463,32" href="#show"><area shape="rect" coords="242,2,345,32" href="#portfolio"><area shape="rect" coords="118,2,221,32" href="#what-we-do">
-        <area shape="rect" coords="3,3,106,33" href="#about">
-    </map>
+
+    <p>
+        <a href="#about" id="about-nav">关于我们</a>
+        <a href="#what-we-do" id="wedo-nav">我们能做</a>
+        <a href="#portfolio" id="portfolio-nav">设计作品</a>
+        <a href="#show" id="design-nav">设计师</a>
+        <a href="#copy-right" class="notify-contact" id="contact-nav">联系我们</a>
+    </p>
 </div>
 
 <div id="banner">
@@ -35,10 +32,10 @@
             <div class="scroller">
                 <div class="ks-switchable-content">
                     <div class="banner contact"
-                         style="background-image: url(/file/50f258368d1858a03b002867)"><p><a
+                         style="background-image: url(http://www.jeef.com.cn:1280/file/50f258368d1858a03b002867)"><p><a
                             href="#copy-right" class="notify-contact">联系我们</a></p></div>
                     <div class="banner"
-                         style="background-image: url(/file/50f2d637d5c2a5ad4b00000d)"></div>
+                         style="background-image: url(http://www.jeef.com.cn:1280/file/50f2d637d5c2a5ad4b00000d)"></div>
                 </div>
             </div>
         </div>
@@ -152,7 +149,7 @@
                 var container = DOM.get('#ks-switchable-content');
                 var li = '';
                 S.each(data.docs, function (item) {
-                    li += '<div class="pic" data-id="' + item._id + '" style="background-image:url(/file/' + item._id + ')"></div>'
+                    li += '<div class="pic" data-id="' + item._id + '" style="background-image:url(/file/' + item._id + '_24)"></div>'
                 });
                 DOM.html(container, li);
                 //通过DOM元素新建旋转木马
@@ -195,7 +192,7 @@
 <script type="tpl" id="tpl">
     {{#each docs as item index}}
     <b class="pic-container" data-id="{{item._id}}"><span class="pic"
-                                   style="background-image:url(/file/{{item._id}}_170)"></span></b>
+                                                          style="background-image:url(/file/{{item._id}}_170)"></span></b>
     {{/each}}
 </script>
 
@@ -430,11 +427,6 @@ KISSY.use("gallery/template/1.0/,dom,event,ajax,anim", function (S, Template, DO
             next();
         });
 
-
-        Event.on('#team', 'click', function () {
-            dialog.set('bodyContent', '<div id="fixed-image"><i></i><a href="http://www.jeef.com.cn:1280/file/50f29d76c8d870f843000007" target="_blank"><img src="http://www.jeef.com.cn:1280/file/50f29d76c8d870f843000007_670" /></a></div> ');
-            show()
-        });
 
         Event.on(window, 'resize scroll', center);
 
