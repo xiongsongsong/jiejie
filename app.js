@@ -40,6 +40,14 @@ app.get(/\/file\/([\w]+)/, require('./routes/fs').file);
 
 app.get('/fsfilter', require('./routes/filter').find);
 
+//监控使用，返回服务器日志
+app.get('/server-log', function (req, res) {
+    res.header('content-type', 'text/plain;charset=gbk');
+    res.sendfile('./log.txt', function (err, data) {
+        res.end(data);
+    });
+});
+
 http.createServer(app).listen(app.get('port'), function () {
     console.log("Express server listening on port " + app.get('port'));
 });
