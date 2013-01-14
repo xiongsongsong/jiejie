@@ -13,13 +13,14 @@ exports.update = function (req, res) {
     var body = req.body;
     var collection = new DB.mongodb.Collection(DB.client, 'files');
 
+    //只对以下字段进行处理
     var type = ['category', 'color', 'date', 'series', 'title', 'describe'];
 
     var update = Object.create(null);
 
     Object.keys(body).forEach(function (k) {
         if (type.indexOf(k) > -1) {
-            update[k] = body[k]
+            if (body[k] && body[k].trim().length > 0) update[k] = body[k]
         }
     });
 

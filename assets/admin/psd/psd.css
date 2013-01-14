@@ -18,6 +18,13 @@
     position: relative;
 }
 
+#container .pic.edit {
+    border-color: #000;
+    border-style: solid;
+    box-shadow: 0 0 120px rgba(0, 0, 0, .8);
+    z-index: 95;
+}
+
 #container .checked::before {
     content: '✓';
     font-size: 42px;
@@ -194,9 +201,9 @@ b.switch {
     right: auto;
     width: 478px;
     padding: 10px;
-    bottom: -260px;
+    bottom: -300px;
     margin-left: -240px;
-    height: 230px;
+    height: 280px;
     background: rgba(255, 255, 255, .8);
     z-index: 96;
     -webkit-transition: -webkit-transform .2s ease-in, all .2s ease-in;
@@ -232,6 +239,11 @@ b.switch {
 #edit input,
 #edit textarea {
     width: 300px;
+}
+
+#edit textarea {
+    height: 94px;
+    resize: none;
 }
 
 #edit span.tips {

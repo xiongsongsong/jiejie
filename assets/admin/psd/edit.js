@@ -18,6 +18,10 @@ define(function (require, exports, module) {
         var $target = $(ev.currentTarget);
         $edit.addClass('show');
         var data = $target.parents('div.pic');
+        data.addClass('edit');
+        data.siblings().removeClass('edit');
+        //如果是自定义触发，则滚动视图，以让编辑对象可见
+        if (!ev.clientX) data[0].scrollIntoView(false);
         $.getJSON('filter?_id=' + data.attr('data-id'), function (serverDocs) {
             if (serverDocs.docs.length > 0) {
                 edit(data, serverDocs.docs[0]);
