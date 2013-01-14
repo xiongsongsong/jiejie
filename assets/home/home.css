@@ -583,20 +583,32 @@
     height: 154px;
     left: 372px;
     top: 237px;
-    overflow: hidden;
     border: solid 1px red;
 }
 
-#team-switch .scrollable {
-    position: relative;
-    width: 244px;
+#team-container .ks-switchable-content {
     height: 154px;
-    z-index: 1;
-
+    overflow: hidden;
+    position: relative;
 }
 
-#team-switch .ks-switchable-content {
+#team-container .ks-switchable-nav {
+    position: absolute;
     width: 100%;
+    left: 0;
+    bottom: -20px;
+    text-align: center;
+}
+
+#team-container .ks-switchable-nav li {
+    display: inline-block;
+    *display: inline;
+    _display: inline;
+    zoom: 1;
+    width: 30px;
+    height: 2px;
+    background: #c2c2c2;
+    text-indent: -999em;
 }
 
 .ks-ext-close {

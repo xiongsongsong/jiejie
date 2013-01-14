@@ -28,14 +28,15 @@ define(function (require, exports, module) {
             id.push(item.getAttribute('data-id'));
         });
 
-        $.post("/admin/update-file", {
-                type: type,
-                value: value,
-                id: id.join(',')
-            },
-            function (data) {
-                require('./filter').update();
-            });
+
+        var data = {};
+
+        data[type] = value;
+        data.id = id.join(',');
+
+        $.post("/admin/update-file", data, function (data) {
+            require('./filter').update();
+        });
 
         e.preventDefault();
     });
