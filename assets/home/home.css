@@ -709,13 +709,14 @@
 #container .ks-waterfall .content {
     background: #ecebed url(/global/images/cire-b.png) 0 bottom no-repeat;
     padding-bottom: .5em;
-    position: relative;
+    border: solid 1px red;
 }
 
 #container .ks-waterfall .content p {
     padding: 0 1em;
     text-align: left;
     font-size: 12px;
+    width: 100%;
 }
 
 #container .ks-waterfall h2 {
