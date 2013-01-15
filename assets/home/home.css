@@ -81,7 +81,7 @@
 /*关于我们 About*/
 
 #about {
-    background: url(/global/images/about.png) center 0 no-repeat;
+    background: url(/global/images/about.png?new) center 0 no-repeat;
     height: 538px;
     margin-top: 69px;
 }
