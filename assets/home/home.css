@@ -243,6 +243,7 @@
     float: right;
     margin: 12px 0 0 0;
     white-space: nowrap;
+    width:80px;
 }
 
 .pagination b {
