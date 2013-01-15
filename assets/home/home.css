@@ -693,10 +693,6 @@
     text-align: center;
 }
 
-#container .ks-waterfall span img {
-    display: inlin;
-}
-
 #container .ks-waterfall  span s {
     position: absolute;
     left: 8px;
