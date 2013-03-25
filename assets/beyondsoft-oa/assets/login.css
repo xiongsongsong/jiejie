@@ -53,7 +53,7 @@ a:hover {
 }
 
 #login input.login {
-    background-image: url(./img/login.png);
+    background-image: url(img/login.png);
 }
 
 #login input.login {
@@ -82,7 +82,7 @@ p.modify-password a {
 }
 
 #login input.vpn-login {
-    background-image: url(./img/login.png);
+    background-image: url(img/login.png);
     background-position: 0 -224px;
     width: 128px;
     height: 39px;
