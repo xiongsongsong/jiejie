@@ -122,3 +122,17 @@ a:hover {
     font-family: simsun, sans-serif;
     font-size: 12px;
 }
+
+/*公用的metro动画容器*/
+.win8-metro {
+    position: relative;
+}
+
+.win8-metro .wrapper {
+    overflow: hidden;
+    position: relative;
+}
+
+.win8-metro .wrapper .item{
+    overflow: hidden;
+}

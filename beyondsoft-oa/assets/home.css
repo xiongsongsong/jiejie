@@ -69,7 +69,7 @@ h2 span {
 }
 
 #photo .container {
-    margin: 10px  0 0 0;
+    margin: 10px 0 0 0;
 }
 
 #photo .container .item {
@@ -336,7 +336,7 @@ li.more {
     border-bottom: none;
 }
 
-#personal-details p {
+#personal-details p.name {
     position: relative;
     background-color: #299edb;
     width: 204px;
@@ -345,7 +345,7 @@ li.more {
     font-size: 22px;
 }
 
-#personal-details p strong {
+#personal-details p.name strong {
     position: absolute;
     left: 24px;
     top: 16px;
@@ -386,11 +386,22 @@ li.more {
     font-family: simsun, sans-serif;
 }
 
-#personal-details a.timesheet {
-    margin-top: 3px;
-    display: block;
-    width: 204px;
+/*win8滑块*/
+#personal-details .timesheet {
+    margin-top: 3px
+}
+
+#personal-details .win8-metro .wrapper {
     height: 66px;
+}
+
+#personal-details .timesheet .item {
+    width: 204px;
+    height: 100%;
+}
+
+/*Timesheet*/
+#personal-details .timesheet .title {
     background-color: #299edb;
     text-align: center;
     font-size: 30px;
@@ -399,11 +410,35 @@ li.more {
     text-decoration: none;
 }
 
-/*企业文化*/
-
-#corporate-culture {
-
+#personal-details .timesheet .weekly {
+    background: #299edb;
 }
+
+/*上周提交     本周提交*/
+#personal-details .timesheet .weekly p {
+    float: left;
+    border-right: solid 1px #1884bd;
+    width: 32.8%;
+    color: #fff;
+    text-align: center;
+    margin-top:3px
+}
+
+#personal-details .timesheet .weekly p.last {
+    border-right: none;
+}
+
+#personal-details .timesheet .weekly p strong {
+    display: block;
+    font-size: 28px;
+}
+
+#personal-details .timesheet .weekly p span {
+    font-family: simsun, sans-serif;
+    font-size: 12px;
+}
+
+/*企业文化*/
 
 #corporate-culture h2 {
     border-bottom: none;
@@ -480,3 +515,5 @@ li.more {
 #corporate-culture .panel .questionnaire s {
     background-position: -500px -534px;
 }
+
+
