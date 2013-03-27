@@ -64,6 +64,7 @@ html {
 
 .unit .content-bg .content {
     background: url(./img/990-r.png) right 0 repeat-y;
+    padding: 1px 0;
 }
 
 .unit .b-bg,
@@ -85,4 +86,24 @@ html {
 /*开始主体内容*/
 .unit {
 
+}
+
+.unit .container {
+    margin: 2em 0;
+}
+
+.unit .container h2 {
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    margin: 0 18px;
+    background: url(./img/h2-dashed.png) left bottom repeat-x;
+}
+
+.unit .container h2 span {
+    border-bottom: solid 3px #eba073;
+    display: inline-block;
+    padding: 0 2px 2px 0;
+    position: relative;
+    top: -1px;
+    color: #333;
 }
