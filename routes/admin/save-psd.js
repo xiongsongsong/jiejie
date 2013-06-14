@@ -48,7 +48,6 @@ var allowFile = {
 //递归保存每个文件日志、文件实体和对应缩略图
 function _savePsd(files, req, res) {
 
-    var errorMsg = [];
     var pass = [];
     var tempFile = [];
 
@@ -107,52 +106,40 @@ function _savePsd(files, req, res) {
                             var gs;
 
                             if (extName === 'psd') {
-                                console.log('即将处理PSD');
-                                //首先保存PSD，注意后缀
-                                gs = new GridStore(DB.dbServer, fileId + '_psd', "w", {
-                                    chunk_size: 10240
-                                });
-                                gs.writeFile(cur.path, function (err) {
+                                console.log('正在转换PSD到jpg');
+
+                                var jpgPath = path.join(path.dirname(cur.path), fileId + '.jpg');
+
+                                im.convert([cur.path + '[0]', jpgPath], function (err) {
                                     if (!err) {
 
-                                        console.log('保存PSD成功');
-                                        console.log('正在转换PSD文件为jpg');
+                                        console.log('成功转换psd-->jpg');
 
-                                        var jpgPath = path.join(path.dirname(cur.path), fileId + '.jpg');
+                                        tempFile.push(jpgPath);
 
-                                        im.convert([cur.path + '[0]', jpgPath], function (err) {
+                                        //将PSD转换为JPG
+                                        gs = new GridStore(DB.dbServer, fileId, "w", {
+                                            chunk_size: 10240
+                                        });
+                                        console.log('开始保存psd生成的jpg');
+
+                                        gs.writeFile(jpgPath, function (err) {
                                             if (!err) {
-
-                                                console.log('成功转换psd-->jpg');
-
-                                                tempFile.push(jpgPath);
-
-                                                //将PSD转换为JPG
-                                                gs = new GridStore(DB.dbServer, fileId, "w", {
-                                                    chunk_size: 10240
-                                                });
-                                                console.log('开始保存psd生成的jpg');
-
-                                                gs.writeFile(jpgPath, function (err) {
-                                                    if (!err) {
-                                                        console.log('保存psd生成的jpg成功！');
-                                                        //用新生成的jpg来生成缩略图
-                                                        cur.path = jpgPath;
-                                                        resize(cur, fileId, function () {
-                                                            save();
-                                                        });
-                                                    } else {
-                                                        console.log('无法保存jpg' + fileId + Date.now());
-                                                    }
+                                                console.log('保存psd生成的jpg成功！');
+                                                //用新生成的jpg来生成缩略图
+                                                cur.path = jpgPath;
+                                                resize(cur, fileId, function () {
+                                                    save();
                                                 });
                                             } else {
-                                                console.log('转换PSD到jpg失败', err);
+                                                console.log('无法保存jpg' + fileId + Date.now());
                                             }
                                         });
                                     } else {
-                                        console.log('PSD保存失败');
+                                        console.log('转换PSD到jpg失败', err);
                                     }
                                 });
+
                             } else {
                                 gs = new GridStore(DB.dbServer, fileId, "w", {
                                     chunk_size: 10240
@@ -174,13 +161,11 @@ function _savePsd(files, req, res) {
                             }
 
                         } else {
-                            errorMSG.push('无法保存该条记录' + Date.now() + ',');
                             console.log(err);
                         }
                     });
 
             } else {
-                errorMsg.push(cur.name + ' wrong picture file');
                 save();
             }
         });
@@ -240,7 +225,7 @@ function unlink(list) {
     var cur = list.shift();
     fs.unlink(cur, function (err) {
         if (!err) {
-            console.log(cur + 'already unlink');
+            console.log(cur + ' already unlink');
         } else {
             console.log('unlink fail', err);
         }
