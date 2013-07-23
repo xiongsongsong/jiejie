@@ -1,0 +1,109 @@
+html {
+    background: url(./img/body-bg.png);
+}
+
+#header {
+    background: url(./img/bg.png);
+    height: 85px;
+}
+
+#header .content {
+    width: 990px;
+    margin: 0 auto;
+}
+
+#header .content img {
+    margin-top: 21px
+}
+
+/*面包屑*/
+.crumbs {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    width: 990px;
+    margin: 1em auto;
+    color: #666;
+}
+
+.crumbs a {
+    color: #666;
+    text-decoration: none;
+    background: url(./img/sprites.png) right 3px no-repeat;
+    display: inline-block;
+    padding-right: 12px;
+}
+
+.unit {
+    margin: 0 auto;
+}
+
+.w990 {
+    width: 990px;
+}
+
+.unit .t-bg,
+.unit .t-bg s {
+    background: url(./img/t-bg.png);
+    height: 7px;
+    overflow: hidden;
+    position: relative;
+}
+
+.unit .t-bg s {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 12px;
+    background-position: right 0;
+}
+
+.unit .content-bg {
+    background: #eee url(./img/990-l.png) 0 0 repeat-y;
+    margin: 0 1px 0 0;
+}
+
+.unit .content-bg .content {
+    background: url(./img/990-r.png) right 0 repeat-y;
+    padding: 1px 0;
+}
+
+.unit .b-bg,
+.unit .b-bg s {
+    background: url(./img/b-bg.png);
+    height: 7px;
+    overflow: hidden;
+    position: relative;
+}
+
+.unit .b-bg s {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 12px;
+    background-position: right 0;
+}
+
+/*开始主体内容*/
+.unit {
+
+}
+
+.unit .container {
+    margin: 2em 0;
+}
+
+.unit .container h2 {
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    margin: 0 18px;
+    background: url(./img/h2-dashed.png) left bottom repeat-x;
+}
+
+.unit .container h2 span {
+    border-bottom: solid 3px #eba073;
+    display: inline-block;
+    padding: 0 2px 2px 0;
+    position: relative;
+    top: -1px;
+    color: #333;
+}
