@@ -36,7 +36,7 @@ function deletePSD(docs, id) {
     function del() {
         if (docs.length < 1) {
             console.log('全部删除完毕，开始删除主记录');
-            var collection = new DB.mongodb.Collection(DB.client, 'files');
+            var collection = new DB.mongodb.Collection(DB.client, 'fs.files');
             collection.remove({_id: id}, {w: 1}, function (err, numberOfRemovedDocs) {
                 if (!err) {
                     console.log('已经删除' + numberOfRemovedDocs + '条记录,deletePSD,id:' + id);
