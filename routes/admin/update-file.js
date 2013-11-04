@@ -21,6 +21,8 @@ exports.update = function (req, res) {
     Object.keys(body).forEach(function (k) {
         if (type.indexOf(k) > -1) update[k] = body[k] && body[k].trim().length > 0 ? body[k].trim() : '';
     });
+    
+    update.ts = Date.now()
 
     collection.update(
         {
