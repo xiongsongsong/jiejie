@@ -24,7 +24,7 @@ exports.find = function (req, res) {
     }
 
     collection.find(query, fields).sort([
-            ['_id', -1]
+            ['ts', -1]
         ]).toArray(function (err, docs) {
             res.header('content-type', 'application/json;charset=utf-8');
             res.end(JSON.stringify({docs: docs}, undefined, '\t'));
