@@ -320,7 +320,7 @@ KISSY.use("ua,gallery/template/1.0/,dom,event,ajax,anim", function (S, UA, Templ
 
     }
 
-    var p = new P('#portfolio-container', DOM.get('#tpl').innerHTML, 10);
+    var p = new P('#portfolio-container', DOM.get('#tpl').innerHTML, 15);
 
     Event.delegate('#p', 'mousedown', 'b', function (ev) {
         var target = ev.target;
@@ -511,7 +511,7 @@ KISSY.use("ua,gallery/template/1.0/,dom,event,ajax,anim", function (S, UA, Templ
         },
         success: function (data) {
             KISSY.use("waterfall", function (S, Waterfall) {
-                var p = new P('#container', DOM.get('#water-tpl').innerHTML, 15);
+                var p = new P('#container', DOM.get('#water-tpl').innerHTML, 10);
                 p.render(data);
                 render();
 
