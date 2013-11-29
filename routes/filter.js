@@ -21,10 +21,10 @@ exports.find = function (req, res) {
     var param = {}
 
     allowField.forEach(function (item) {
-        if (allowField.indexOf(item) >= 0) param[item] = req.query[item]
+        if (allowField.indexOf(item) >= 0 && req.query[item] !== undefined) param[item] = req.query[item]
     })
 
-    if (Object.keys(query).length > 10) {
+    if (Object.keys(req.query).length > 10) {
         res.end()
         return
     }
