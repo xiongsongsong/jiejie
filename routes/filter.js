@@ -26,24 +26,20 @@ exports.find = function (req, res) {
     collection.find(query, fields).sort([
             ['ts', -1]
         ]).toArray(function (err, docs) {
-            res.header('content-type', 'application/json;charset=utf-8');
-            res.end(JSON.stringify({docs: docs}, undefined, '\t'));
+            res.jsonp({docs: docs});
         })
 };
 
 
 exports.getCategory = function (req, res) {
     var collection = new DB.mongodb.Collection(DB.client, 'files');
-    res.header('Content-Type', 'application/json;charset=utf-8');
-
     var field = req.query.field;
-
     if (!field || field.toString().trim().length < 1) {
         res.end('wrong,require field');
         return;
     }
 
     collection.distinct(field, function (err, docs) {
-        res.end(JSON.stringify(docs));
+        res.jsonp(docs);
     });
 };
