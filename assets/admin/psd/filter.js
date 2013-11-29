@@ -29,7 +29,7 @@ define(function (require, exports, module) {
     };
 
     function getData(filter) {
-        $.getJSON("/filter", filter, function (data) {
+        $.ajax("/filter", { data: filter, dataType: 'jsonp'}).done(function (data) {
             render(data);
         });
     }
