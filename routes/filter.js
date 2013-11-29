@@ -13,6 +13,13 @@ var path = require('path');
 exports.find = function (req, res) {
 
     var query = req.query;
+    var callback = query.callback
+    delete query.callback
+
+    if (Object.keys(query).length > 10) {
+        return
+        res.end()
+    }
 
     var collection = new DB.mongodb.Collection(DB.client, 'files');
 
@@ -26,20 +33,21 @@ exports.find = function (req, res) {
     collection.find(query, fields).sort([
             ['ts', -1]
         ]).toArray(function (err, docs) {
-            res.jsonp({docs: docs});
+            res.header('content-type', 'application/javascript;charset=utf-8');
+            res.end(callback + '(' + JSON.stringify({docs: docs}) + ')');
         })
 };
-
 
 exports.getCategory = function (req, res) {
     var collection = new DB.mongodb.Collection(DB.client, 'files');
     var field = req.query.field;
     if (!field || field.toString().trim().length < 1) {
-        res.end('wrong,require field');
+        res.end(req.query.callback + '(null)');
         return;
     }
 
     collection.distinct(field, function (err, docs) {
-        res.jsonp(docs);
+        res.header('content-type', 'application/javascript;charset=utf-8');
+        res.end(req.query.callback + '(' + JSON.stringify(docs) + ')');
     });
 };
