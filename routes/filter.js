@@ -16,6 +16,14 @@ exports.find = function (req, res) {
     var callback = query.callback
     delete query.callback
 
+    var allowField = ['category', 'color', 'date', 'series']
+
+    var param = {}
+
+    allowField.forEach(function (item) {
+        if (allowField[item]) param[item] = req.query[item]
+    })
+
     if (Object.keys(query).length > 10) {
         return
         res.end()
@@ -30,7 +38,7 @@ exports.find = function (req, res) {
         fields.describe = 1;
     }
 
-    collection.find(query, fields).sort([
+    collection.find(param, fields).sort([
             ['ts', -1]
         ]).toArray(function (err, docs) {
             res.header('content-type', 'application/javascript;charset=utf-8');
