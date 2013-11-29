@@ -21,12 +21,12 @@ exports.find = function (req, res) {
     var param = {}
 
     allowField.forEach(function (item) {
-        if (allowField[item]) param[item] = req.query[item]
+        if (allowField.indexOf(item) >= 0) param[item] = req.query[item]
     })
 
     if (Object.keys(query).length > 10) {
-        return
         res.end()
+        return
     }
 
     var collection = new DB.mongodb.Collection(DB.client, 'files');
