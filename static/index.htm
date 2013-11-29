@@ -344,8 +344,7 @@ KISSY.use("ua,gallery/template/1.0/,dom,event,ajax,anim", function (S, UA, Templ
         data[DOM.attr(category, 'data-field')] = DOM.attr(DOM.get('b.checked', '#filter-waterfall div.active'), 'data-value');
         KISSY.io({
             url: "/filter",
-            type: "get",
-            dataType: "json",
+            dataType: "jsonp",
             data: data,
             success: function (data) {
                 data.docs = S.filter(data.docs, function (item) {
@@ -502,11 +501,9 @@ KISSY.use("ua,gallery/template/1.0/,dom,event,ajax,anim", function (S, UA, Templ
         DOM.addClass(target, 'active');
     });
 
-
     KISSY.io({
         url: '/filter',
-        type: 'get',
-        dataType: 'json',
+        dataType: 'jsonp',
         data: {
             category: '风采秀'
         },
