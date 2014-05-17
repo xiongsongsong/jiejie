@@ -16,7 +16,7 @@ exports.find = function (req, res) {
     var callback = query.callback
     delete query.callback
 
-    var allowField = ['category', 'color', 'date', 'series']
+    var allowField = ['category', 'color', 'date', 'series', 'company']
 
     var param = {}
 
