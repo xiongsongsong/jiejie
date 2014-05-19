@@ -14,7 +14,7 @@ exports.update = function (req, res) {
     var collection = new DB.mongodb.Collection(DB.client, 'files');
 
     //只对以下字段进行处理
-    var type = ['category', 'color', 'date', 'series', 'title', 'describe'];
+    var type = ['category', 'color', 'date', 'series', 'title', 'describe', 'company'];
 
     var update = Object.create(null);
 
