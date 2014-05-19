@@ -28,10 +28,6 @@ exports.find = function (req, res) {
         res.end()
         return
     }
-    
-    if(param._id){
-        param._id=ObjectID(param._id)
-    }
 
     var collection = new DB.mongodb.Collection(DB.client, 'files');
 
