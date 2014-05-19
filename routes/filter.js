@@ -8,7 +8,7 @@
 
 var DB = require('db');
 var path = require('path');
-
+var ObjectID = DB.mongodb.ObjectID;
 
 exports.find = function (req, res) {
 
@@ -27,6 +27,10 @@ exports.find = function (req, res) {
     if (Object.keys(req.query).length > 10) {
         res.end()
         return
+    }
+    
+    if(param._id){
+        param._id=ObjectID(param._id)
     }
 
     var collection = new DB.mongodb.Collection(DB.client, 'files');
