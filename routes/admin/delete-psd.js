@@ -38,7 +38,7 @@ function deletePSD(docs, id) {
         if (docs.length < 1) {
             console.log('全部删除完毕，开始删除主记录');
             var collection = new DB.mongodb.Collection(DB.client, 'fs.files');
-            collection.remove({_id: ObjectID(id)}, {w: 1}, function (err, numberOfRemovedDocs) {
+            collection.remove({_id: new RegExp(id,'gi')}, {w: 1}, function (err, numberOfRemovedDocs) {
                 if (!err) {
                     console.log('已经删除' + numberOfRemovedDocs + '条记录,deletePSD,id:' + id);
                 } else {
@@ -48,7 +48,7 @@ function deletePSD(docs, id) {
             
             
             var files = new DB.mongodb.Collection(DB.client, 'files');
-            files.remove({_id: ObjectID(id)}, {w: 1}, function (err, numberOfRemovedDocs) {
+            files.remove({_id: new RegExp(id,'gi')}, {w: 1}, function (err, numberOfRemovedDocs) {
                 if (!err) {
                     console.log('已经删除files集合' + numberOfRemovedDocs + '条记录:' + id);
                 } else {
