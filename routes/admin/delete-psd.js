@@ -45,6 +45,16 @@ function deletePSD(docs, id) {
                     console.log('无法删除ID为' + id + '的记录', numberOfRemovedDocs);
                 }
             });
+            
+            
+            var files = new DB.mongodb.Collection(DB.client, 'files');
+            files.remove({_id: ObjectID(id)}, {w: 1}, function (err, numberOfRemovedDocs) {
+                if (!err) {
+                    console.log('已经删除files集合' + numberOfRemovedDocs + '条记录:' + id);
+                } else {
+                    console.log('无法删除ID为' + id + '的集合', numberOfRemovedDocs);
+                }
+            });
             return;
         }
         var curDocs = docs.shift();
