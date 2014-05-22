@@ -142,7 +142,7 @@ function _savePsd(files, req, res) {
 
                             } else {
                                 gs = new GridStore(DB.dbServer, fileId, "w", {
-                                    chunk_size: 10240
+                                    chunk_size: 1024
                                 });
 
                                 gs.writeFile(cur.path, function (err) {
