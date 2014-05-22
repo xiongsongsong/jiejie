@@ -1,0 +1,22 @@
+TypeError: Cannot read property 'slaveOk' of undefined
+  at new Collection (/root/jiejie/node_modules/mongodb/lib/mongodb/collection.js:52:65)
+  at /root/jiejie/routes/admin/save-psd.js:82:34
+  at [object Object].callback (/root/jiejie/node_modules/imagemagick/imagemagick.js:165:5)
+  at [object Object].Accumulator.finish (/root/jiejie/node_modules/imagemagick/imagemagick.js:60:55)
+  at ChildProcess.<anonymous> (/root/jiejie/node_modules/imagemagick/imagemagick.js:86:11)
+  at ChildProcess.EventEmitter.emit (events.js:98:17)
+  at maybeClose (child_process.js:753:16)
+  at Socket.<anonymous> (child_process.js:966:11)
+  at Socket.EventEmitter.emit (events.js:95:17)
+  at Pipe.close (net.js:465:12)
+TypeError: Cannot read property 'slaveOk' of undefined
+  at new Collection (/root/jiejie/node_modules/mongodb/lib/mongodb/collection.js:52:65)
+  at /root/jiejie/routes/admin/save-psd.js:82:34
+  at [object Object].callback (/root/jiejie/node_modules/imagemagick/imagemagick.js:165:5)
+  at [object Object].Accumulator.finish (/root/jiejie/node_modules/imagemagick/imagemagick.js:60:55)
+  at ChildProcess.<anonymous> (/root/jiejie/node_modules/imagemagick/imagemagick.js:86:11)
+  at ChildProcess.EventEmitter.emit (events.js:98:17)
+  at maybeClose (child_process.js:753:16)
+  at Socket.<anonymous> (child_process.js:966:11)
+  at Socket.EventEmitter.emit (events.js:95:17)
+  at Pipe.close (net.js:465:12)
