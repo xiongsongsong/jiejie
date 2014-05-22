@@ -27,6 +27,7 @@ exports.delete = function (req, res) {
     var collection = new DB.mongodb.Collection(DB.client, 'fs.files');
     collection.find({ filename: new RegExp(id + '.*')}, {_id: 1}).toArray(function (err, docs) {
         res.end('即将删除' + docs.length + '个文件');
+        console.log('即将删除' + docs.length + '个文件', docs);
         deletePSD(docs, id);
     })
 };
