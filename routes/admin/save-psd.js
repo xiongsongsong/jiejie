@@ -119,7 +119,7 @@ function _savePsd(files, req, res) {
 
                                         //将PSD转换为JPG
                                         gs = new GridStore(DB.dbServer, fileId, "w", {
-                                            chunk_size: 10240
+                                            chunk_size: 1024
                                         });
                                         console.log('开始保存psd生成的jpg');
 
@@ -197,7 +197,7 @@ function _savePsd(files, req, res) {
                     tempFile.push(dstSrc);
 
                     var gs = new GridStore(DB.dbServer, fileId + '_' + curSize, "w", {
-                        "chunk_size": 10240
+                        "chunk_size": 1024
                     });
                     gs.writeFile(dstSrc, function (err) {
                         if (err) console.log(err);
